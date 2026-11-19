@@ -31,7 +31,7 @@
   --ease:cubic-bezier(.16,1,.3,1);
 }
 *{box-sizing:border-box}
-html{scroll-snap-type:y mandatory;scroll-behavior:smooth;background:var(--bg)}
+html{background:var(--bg)}
 body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .slide{position:relative;min-height:100vh;height:100vh;scroll-snap-align:start;overflow:hidden;display:flex;align-items:center;padding:72px 6vw 64px}
 .slide>.content{position:relative;z-index:2;width:100%;max-width:1320px;margin:0 auto}
@@ -57,10 +57,15 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
 .fig-cap{font-size:12px;color:var(--muted);margin-top:8px;font-family:var(--font-mono)}
 .type-caret::after{content:"";display:inline-block;width:.08em;height:.9em;margin-left:.05em;background:var(--primary);vertical-align:-.08em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.tool-cloud{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:10px}
-.tool-name{font-family:var(--font-mono);font-size:10.5px;padding:3px 9px;border-radius:999px;border:1px solid rgba(237,191,77,.3);background:rgba(237,191,77,.06);color:#f3d98c;animation:tool-float var(--t,4s) ease-in-out var(--d,0s) infinite alternate}
-.tool-name.k{border-color:rgba(128,177,72,.55);color:#cfe8a6;background:rgba(128,177,72,.12)}
-@keyframes tool-float{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+/* Las 20 tools flotan por la diapositiva como partículas. */
+.tool-sky{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.tool-sky>span{position:absolute;left:0;top:0;will-change:transform}
+.tool-name{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-family:var(--font-mono);font-size:11px;padding:4px 10px;border-radius:999px;border:1px solid rgba(237,191,77,.32);background:rgba(30,18,14,.55);color:#f3d98c;opacity:.85}
+.tool-name.k{border-color:rgba(128,177,72,.6);color:#cfe8a6;background:rgba(20,34,14,.6);opacity:1}
+.tool-sky svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tool-name svg{width:12px;height:12px}
+.tool-ico{width:18px;height:18px;color:#edbf4d;opacity:.4}
+.tool-ico svg{width:100%;height:100%}
 .cost{font-family:var(--font-display);font-size:2.4rem;line-height:1}
 
 /* Pie y progreso */
@@ -104,7 +109,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
 /* Chat de Vini */
 .chat{display:flex;flex-direction:column;height:min(70vh,640px);border-radius:22px;overflow:hidden;background:rgba(12,18,12,.72);border:1px solid var(--glass-border);backdrop-filter:blur(16px);box-shadow:0 40px 120px -40px rgba(128,177,72,.35)}
 .chat-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.06)}
-.chat-body{flex:1;overflow-y:auto;padding:18px 14px;display:flex;flex-direction:column;gap:14px;scrollbar-width:thin}
+.chat-body{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:18px 14px;display:flex;flex-direction:column;gap:14px;scrollbar-width:thin}
 .msg{display:flex;gap:10px;align-items:flex-start}
 .msg.user{justify-content:flex-end}
 .bubble{border-radius:18px;padding:10px 15px;font-size:14px;line-height:1.55;max-width:82%}
@@ -153,7 +158,6 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
   .slide{height:auto;min-height:100vh;padding:72px 16px 64px}
   .chat{height:60vh}
 }
-@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .tool-name{animation:none} }
 </style>
 </head>
 <body>
@@ -324,81 +328,21 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
 </section>
 
 <!-- 10 VINI RAG -->
-<section class="slide" data-name="Vini · Cómo responde" data-net="0.9" data-ai>
+<section class="slide" data-name="Vini · Cómo responde" data-net="0" data-ai>
   <div class="bg-aurora"></div>
+  <div class="tool-sky" id="tool-sky"></div>
   <div class="content">
     <div class="eyebrow mb-4 pop" style="color:#f5a8be">09 · Inteligencia artificial</div>
     <h2 class="h-display text-5xl md:text-6xl mb-10"><span data-type="Vini no adivina: busca, cita y responde.">Vini no adivina: busca, cita y responde.</span></h2>
     <div class="grid lg:grid-cols-[1.3fr_1fr] gap-8 items-start">
       <div class="space-y-3" id="rag">
         <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">01</span><div><b>DomainGuard</b> <span class="muted">· filtra lo que no es viticultura sin llamar al modelo</span></div></div>
-        <div class="glass p-4 flex gap-4 items-start pop"><span class="num-chip">02</span><div><b>El modelo elige una herramienta</b> <span class="muted">· 20 tools: datos de la cuenta, clima, riesgo, conocimiento…</span>
-          <div class="tool-cloud">
-            <span class="tool-name k" style="--t:3.6s;--d:-.4s">search_knowledge</span>
-            <span class="tool-name" style="--t:4.2s;--d:-1.1s">list_my_parcelas</span>
-            <span class="tool-name" style="--t:3.9s;--d:-2.0s">get_maturity_indicators</span>
-            <span class="tool-name" style="--t:4.6s;--d:-.7s">get_weather</span>
-            <span class="tool-name" style="--t:3.3s;--d:-1.6s">detect_disease_risk</span>
-            <span class="tool-name" style="--t:4.4s;--d:-2.6s">recommend_action</span>
-            <span class="tool-name" style="--t:3.8s;--d:-.2s">list_recent_alerts</span>
-            <span class="tool-name" style="--t:4.9s;--d:-1.9s">respond_decision</span>
-            <span class="tool-name" style="--t:3.5s;--d:-2.9s">record_maturity_reading</span>
-            <span class="tool-name" style="--t:4.1s;--d:-1.3s">annotate_maturity_reading</span>
-            <span class="tool-name" style="--t:4.7s;--d:-.9s">record_field_monitoring</span>
-            <span class="tool-name" style="--t:3.4s;--d:-2.3s">record_irrigation</span>
-            <span class="tool-name" style="--t:4.3s;--d:-.5s">record_adverse_event</span>
-            <span class="tool-name" style="--t:3.7s;--d:-1.7s">record_yield_estimate</span>
-            <span class="tool-name" style="--t:4.5s;--d:-2.4s">update_vineyard_log</span>
-            <span class="tool-name" style="--t:3.9s;--d:-.1s">get_registration_catalog</span>
-            <span class="tool-name" style="--t:4.8s;--d:-1.4s">get_wine_batch_status</span>
-            <span class="tool-name" style="--t:3.2s;--d:-2.1s">navigate_screen</span>
-            <span class="tool-name" style="--t:4.0s;--d:-.8s">record_memory</span>
-            <span class="tool-name" style="--t:4.6s;--d:-2.7s">forget_memory</span>
-          </div></div></div>
+        <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">02</span><div><b>El modelo elige una herramienta</b> <span class="muted">· 20 tools, las que flotan alrededor: datos de la cuenta, clima, riesgo, conocimiento…</span></div></div>
         <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">03</span><div><b>Búsqueda híbrida</b> <span class="muted">· vectores (mxbai-embed-large, 1024 dim.) + BM25, fusionados</span></div></div>
         <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">04</span><div><b>Fragmentos con la ruta de la sección</b> <span class="muted">· 246 de manuales + 208 de fichas</span></div></div>
         <div class="glass p-4 flex gap-4 items-center pop" style="border-color:rgba(128,177,72,.5)"><span class="num-chip">05</span><div><b class="neon">Respuesta con citas</b> <span class="muted">· «MANUALVID 2018, p. 30»; sin fuente, lo dice</span></div></div>
       </div>
       <figure class="pop"><img class="fig" style="max-height:52vh" src="assets/fig/fig10.png" alt=""><figcaption class="fig-cap">Fig. 10 · Consulta a Vini con recuperación de conocimiento</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<!-- 10b CÓMO BUSCA VINI -->
-<section class="slide" data-name="Vini · Cómo busca" data-net="0.85" data-ai>
-  <div class="bg-aurora"></div>
-  <div class="content">
-    <div class="eyebrow mb-4 pop" style="color:#f5a8be">09 · Inteligencia artificial · búsqueda</div>
-    <h2 class="h-display text-5xl md:text-6xl mb-8"><span data-type="Encuentra la sección que responde.">Encuentra la sección que responde.</span></h2>
-    <div class="grid lg:grid-cols-[1.35fr_1fr] gap-8 items-start">
-      <div class="space-y-3">
-        <div class="glass p-4 flex gap-4 items-start pop"><span class="num-chip">01</span><div><b>Busca por significado y por palabras</b> <span class="muted">· a la búsqueda por palabras le quita las de la pregunta («cuándo», «pasa», «criterios») y las que están en todo el corpus («vid», «viticultura»): exigirlas dejaba fuera el envero y el riego.</span></div></div>
-        <div class="glass p-4 flex gap-4 items-start pop"><span class="num-chip">02</span><div><b>Lo que tiene las palabras va primero</b> <span class="muted">· antes del corte de 5 documentos. El manual de riego quedaba sexto, detrás de secciones que solo «se parecían».</span></div></div>
-        <div class="glass p-4 flex gap-4 items-start pop"><span class="num-chip">03</span><div><b>Manda la sección cuyo encabezado nombra el tema</b> <span class="muted">· «Floración (p. 30)» y no su vecina «Cuajado»; si dos lo nombran, gana la palabra más rara («Deshojado» sobre «Época de poda»).</span></div></div>
-        <div class="glass p-4 flex gap-4 items-start pop" style="border-color:rgba(128,177,72,.5)"><span class="num-chip">04</span><div><b class="neon">Solo la sección principal llega completa</b> <span class="muted">· la del primer documento con las palabras, hasta 6,500 caracteres; lo demás, 500. «10 a 15 días» y «desde el envero» estaban después del corte.</span></div></div>
-        <div class="glass p-4 flex gap-4 items-start pop"><span class="num-chip">05</span><div><b>Responde primero lo directo</b> <span class="muted">· la cifra o el rango con las palabras del manual, y después el detalle con la página.</span></div></div>
-      </div>
-      <div class="space-y-4">
-        <div class="glass p-6 pop">
-          <div class="eyebrow mb-4" style="color:#edbf4d">Cuánto gasta una búsqueda</div>
-          <div class="grid grid-cols-2 gap-5">
-            <div><div class="cost neon">1.6 s</div><div class="muted text-xs mt-1">por búsqueda (mediana)</div></div>
-            <div><div class="cost">≈ 4 k</div><div class="muted text-xs mt-1">tokens del resultado (≈ 14 k caracteres)</div></div>
-            <div><div class="cost">20 k</div><div class="muted text-xs mt-1">tokens de entrada por pregunta</div></div>
-            <div><div class="cost">3.8 s</div><div class="muted text-xs mt-1">por respuesta (mediana)</div></div>
-          </div>
-          <p class="muted text-xs font-mono mt-5">Medido en producción, 19-nov · tool_invocaciones y turnos</p>
-        </div>
-        <div class="glass p-6 pop" style="border-color:rgba(233,167,36,.4)">
-          <div class="eyebrow mb-3" style="color:#edbf4d">Por qué no todo completo</div>
-          <div class="space-y-3 text-[14px]">
-            <div class="flex items-center gap-3"><span class="w-28 muted text-xs font-mono">corte a 500</span><div class="flex-1 h-2.5 rounded-full bg-white/10"><div class="h-full rounded-full bg-ink-300" style="width:33%"></div></div><span class="font-mono text-xs w-12 text-right">3.5 k</span></div>
-            <div class="flex items-center gap-3"><span class="w-28 muted text-xs font-mono">todo completo</span><div class="flex-1 h-2.5 rounded-full bg-white/10"><div class="h-full rounded-full" style="width:84%;background:#d64072"></div></div><span class="font-mono text-xs w-12 text-right">8.9 k</span></div>
-            <div class="flex items-center gap-3"><span class="w-28 neon text-xs font-mono">solo la principal</span><div class="flex-1 h-2.5 rounded-full bg-white/10"><div class="h-full rounded-full" style="width:43%;background:#80b148"></div></div><span class="font-mono text-xs w-12 text-right">4.6 k</span></div>
-          </div>
-          <p class="muted text-xs mt-4">Caracteres de texto que recibe Vini por búsqueda (mediana de 49 búsquedas del banco). Entregar todo multiplicaba el texto por 2.5; con solo la principal, la pregunta sigue en ~20 k tokens.</p>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -495,7 +439,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
         <div id="cats" class="space-y-3"></div>
       </div>
     </div>
-    <p class="muted text-sm mt-5 pop">La latencia subió porque el historial creció de 8.7 k a 38 k tokens de entrada en la conversación. P26 y P28 se repitieron tras el arreglo de las tools, en conversaciones nuevas (8 k tokens). La pregunta 29 la resuelve DomainGuard sin llamar al modelo. <b class="text-vine-200">Banco completo (30 preguntas, 19-nov): 47 de 60 en cada cuenta; tras arreglar la búsqueda, 55 y 57.</b></p>
+    <p class="muted text-sm mt-5 pop">La latencia subió porque el historial creció de 8.7 k a 38 k tokens de entrada en la conversación. P26 y P28 se repitieron tras el arreglo de las tools, en conversaciones nuevas (8 k tokens). La pregunta 29 la resuelve DomainGuard sin llamar al modelo. <b class="text-vine-200">Banco completo (30 preguntas, 19-nov): 47 de 60 en cada cuenta; tras arreglar la búsqueda, 56 y 58.</b></p>
   </div>
 </section>
 
@@ -552,8 +496,8 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
         <h2 class="h-display text-5xl md:text-6xl"><span data-type="30 preguntas, dos cuentas.">30 preguntas, dos cuentas.</span></h2>
       </div>
       <div class="flex gap-4 pop">
-        <div class="glass px-5 py-3 text-center"><div class="h-display text-4xl neon"><span data-count="55">0</span><span class="text-xl">/60</span></div><div class="muted text-xs">cuenta id 2 · 21 parcelas · antes 47</div></div>
-        <div class="glass px-5 py-3 text-center"><div class="h-display text-4xl neon"><span data-count="57">0</span><span class="text-xl">/60</span></div><div class="muted text-xs">cuenta id 7 · 1 parcela · antes 47</div></div>
+        <div class="glass px-5 py-3 text-center"><div class="h-display text-4xl neon"><span data-count="56">0</span><span class="text-xl">/60</span></div><div class="muted text-xs">cuenta id 2 · 21 parcelas · antes 47</div></div>
+        <div class="glass px-5 py-3 text-center"><div class="h-display text-4xl neon"><span data-count="58">0</span><span class="text-xl">/60</span></div><div class="muted text-xs">cuenta id 7 · 1 parcela · antes 47</div></div>
         <div class="glass px-5 py-3 text-center"><div class="h-display text-4xl"><span data-count="20">0</span><span class="text-xl">/20</span></div><div class="muted text-xs">las 10 clave, en las dos</div></div>
       </div>
     </div>
@@ -567,10 +511,30 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
         <span>19-nov-2026 · una conversación por pregunta</span>
       </div>
     </div>
-    <div class="grid md:grid-cols-3 gap-5 mt-5">
-      <div class="glass p-5 pop"><div class="eyebrow mb-2" style="color:#edbf4d">Consistencia</div><p class="text-[15px]"><b>28 de 30</b> preguntas sacaron lo mismo en las dos cuentas. Cambian la 10 y la 27.</p></div>
-      <div class="glass p-5 pop" style="border-color:rgba(128,177,72,.45)"><div class="eyebrow mb-2" style="color:#b9d2a8">Lo que se arregló</div><p class="text-[15px]">La <b>2, 3, 13, 24 y 25</b> pasaron a 2 en las dos cuentas: el dato estaba en el manual, pero la búsqueda citaba la sección vecina o cortaba el texto. La <b>18</b> (cuándo regar) sigue en 1; su arreglo ya está desplegado.</p></div>
-      <div class="glass p-5 pop"><div class="eyebrow mb-2">Velocidad</div><p class="text-[15px]">Mediana <b class="neon">2.6 s</b> y <b class="neon">2.4 s</b>. La 26 de la id 2 consultó 21 parcelas en 5.3 s.</p></div>
+    <div class="grid lg:grid-cols-[0.85fr_1.2fr_1.25fr] gap-5 mt-5 items-stretch">
+      <div class="grid gap-5">
+        <div class="glass p-5 pop"><div class="eyebrow mb-2" style="color:#edbf4d">Consistencia</div><p class="text-[15px]"><b>28 de 30</b> preguntas sacaron lo mismo en las dos cuentas. Cambian la 10 y la 27.</p></div>
+        <div class="glass p-5 pop"><div class="eyebrow mb-3">Velocidad</div><div class="flex gap-8"><div><div class="cost neon">2.6 s</div><div class="muted text-xs mt-1">mediana · id 2</div></div><div><div class="cost neon">2.4 s</div><div class="muted text-xs mt-1">mediana · id 7</div></div></div><p class="muted text-xs mt-3">La 26 de la id 2 consultó 21 parcelas en 5.3 s.</p></div>
+      </div>
+      <div class="glass p-6 pop">
+        <div class="eyebrow mb-4" style="color:#edbf4d">Cuánto gasta una búsqueda</div>
+        <div class="grid grid-cols-2 gap-5">
+          <div><div class="cost neon">1.6 s</div><div class="muted text-xs mt-1">por búsqueda (mediana)</div></div>
+          <div><div class="cost">≈ 4 k</div><div class="muted text-xs mt-1">tokens del resultado (≈ 14 k caracteres)</div></div>
+          <div><div class="cost">20 k</div><div class="muted text-xs mt-1">tokens de entrada por pregunta</div></div>
+          <div><div class="cost">3.8 s</div><div class="muted text-xs mt-1">por respuesta (mediana)</div></div>
+        </div>
+        <p class="muted text-xs font-mono mt-5">Medido en producción, 19-nov · tool_invocaciones y turnos</p>
+      </div>
+      <div class="glass p-6 pop" style="border-color:rgba(233,167,36,.4)">
+        <div class="eyebrow mb-3" style="color:#edbf4d">Por qué no todo completo</div>
+        <div class="space-y-3 text-[14px]">
+          <div class="flex items-center gap-3"><span class="w-28 muted text-xs font-mono">corte a 500</span><div class="flex-1 h-2.5 rounded-full bg-white/10"><div class="h-full rounded-full bg-ink-300" style="width:33%"></div></div><span class="font-mono text-xs w-12 text-right">3.5 k</span></div>
+          <div class="flex items-center gap-3"><span class="w-28 muted text-xs font-mono">todo completo</span><div class="flex-1 h-2.5 rounded-full bg-white/10"><div class="h-full rounded-full" style="width:84%;background:#d64072"></div></div><span class="font-mono text-xs w-12 text-right">8.9 k</span></div>
+          <div class="flex items-center gap-3"><span class="w-28 neon text-xs font-mono">solo la principal</span><div class="flex-1 h-2.5 rounded-full bg-white/10"><div class="h-full rounded-full" style="width:43%;background:#80b148"></div></div><span class="font-mono text-xs w-12 text-right">4.6 k</span></div>
+        </div>
+        <p class="muted text-xs mt-4">Caracteres de texto que recibe Vini por búsqueda (mediana de 49 búsquedas del banco). Entregar todo multiplicaba el texto por 2.5; con solo la principal, la pregunta sigue en ~20 k tokens.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -653,9 +617,10 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
     <div class="glass p-7 pop">
       <div class="eyebrow mb-4">Siguientes pasos</div>
       <ul class="space-y-3">
-        <li class="flex gap-3"><span class="num-chip">01</span><span>Repetir la 18 (cuándo regar) y las parciales del banco (8, 10, 21, 27).</span></li>
+        <li class="flex gap-3"><span class="num-chip">01</span><span>Repetir las parciales del banco (8, 10, 21, 27).</span></li>
         <li class="flex gap-3"><span class="num-chip">02</span><span>Riesgo por enfermedad y etapa fenológica, no un índice climático único.</span></li>
         <li class="flex gap-3"><span class="num-chip">03</span><span>Umbrales de incidencia en campo con fuente (chanchito blanco, SENASICA).</span></li>
+        <li class="flex gap-3"><span class="num-chip">04</span><span>Agregar la función BYOK (Bring Your Own Key).</span></li>
       </ul>
     </div>
   </div>
@@ -710,8 +675,8 @@ const BANK = {
   groups: [['Fenología',5],['Cosecha',5],['Plagas',5],['Riego',4],['Clima',3],['Manejo',3],['Datos',3],['Fuera',2]],
   key: [1,6,7,9,11,17,20,26,28,29],
   rows: [
-    ['id 2', [2,2,2,2,2, 2,2,1,2,1, 2,2,2,2,2, 2,2,1,2, 2,1,2, 2,2,2, 2,1,2, 2,2]],
-    ['id 7', [2,2,2,2,2, 2,2,1,2,2, 2,2,2,2,2, 2,2,1,2, 2,1,2, 2,2,2, 2,2,2, 2,2]],
+    ['id 2', [2,2,2,2,2, 2,2,1,2,1, 2,2,2,2,2, 2,2,2,2, 2,1,2, 2,2,2, 2,1,2, 2,2]],
+    ['id 7', [2,2,2,2,2, 2,2,1,2,2, 2,2,2,2,2, 2,2,2,2, 2,1,2, 2,2,2, 2,2,2, 2,2]],
   ],
   q: ['Estados fenológicos','Envero','Floración','Ciclo anual','Sensibilidad al mildiu','Cuándo se vendimia','Brix/pH/AT Cabernet','Madurez fisiológica y comercial','Del corte a la bodega','Vendimiador y cajas','Prevenir Botrytis','Qué es el mildiu','Plagas en Syrah','Enfermedades en floración','Exceso de nitrógeno','Agua al año','Riego deficitario','Cuándo regar','Análisis foliar','Región de Winkler','Clima de Guadalupe','Altitud','Poda de invierno','Deshojado','Plantas por hectárea','Madurez de mis parcelas','Clima de la semana','Riesgo de mildiu','Mundial de fútbol','Programa en Python'],
 };
@@ -777,9 +742,12 @@ function renderAnswer(text){
   };
   resize(); addEventListener('resize', resize);
   const link = 150 * dpr;
-  (function frame(){
+  let last = performance.now();
+  (function frame(t = last){
+    // Velocidad por tiempo y no por cuadro: igual en pantallas de 60 y de 144 Hz.
+    const dt = Math.min(50, t - last) / 16.67; last = t;
     ctx.clearRect(0,0,w,h);
-    for (const p of pts){ p.x += p.vx; p.y += p.vy; if (p.x<0||p.x>w) p.vx*=-1; if (p.y<0||p.y>h) p.vy*=-1; }
+    for (const p of pts){ p.x += p.vx*dt; p.y += p.vy*dt; if (p.x<0||p.x>w) p.vx*=-1; if (p.y<0||p.y>h) p.vy*=-1; }
     for (let i=0;i<pts.length;i++){
       for (let j=i+1;j<pts.length;j++){
         const a=pts[i], b=pts[j], d=Math.hypot(a.x-b.x,a.y-b.y);
@@ -801,22 +769,140 @@ function setCurrent(i){
   $('#sec-name').textContent = s.dataset.name;
   $('#counter').innerHTML = `<b>${pad(i+1)}</b> / ${slides.length}`;
   $('#progress').style.width = `${((i+1)/slides.length)*100}%`;
-  $('#net').style.opacity = s.dataset.net || .3;
+  // Partículas más tenues: estorbaban la lectura.
+  $('#net').style.opacity = (s.dataset.net ?? .3) * .55;
 }
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) setCurrent(slides.indexOf(e.target)); });
 }, {threshold:.55});
 slides.forEach(s => io.observe(s));
-const go = i => slides[Math.max(0, Math.min(slides.length-1, i))].scrollIntoView({behavior: reduced ? 'auto' : 'smooth'});
+
+/* Cada gesto (rueda, touchpad, flecha o swipe) mueve una diapositiva completa con la misma
+   animación: la rueda del mouse avanza a saltos y con el scroll nativo el cambio se veía brusco. */
+const paged = () => matchMedia('(min-width: 901px)').matches;
+let animating = false, target = 0, scrollTween = null;
+function go(i){
+  i = Math.max(0, Math.min(slides.length-1, i));
+  target = i;
+  const y = slides[i].offsetTop;
+  if (reduced){ scrollTo(0, y); return; }
+  if (scrollTween) scrollTween.kill();
+  animating = true;
+  const pos = {y: scrollY};
+  scrollTween = gsap.to(pos, {y, duration: 1.05, ease: 'power3.inOut', onUpdate: () => scrollTo(0, pos.y), onComplete: () => { animating = false; }});
+}
+const step = dir => go((animating ? target : current) + dir);
+
+let wheelAcc = 0, wheelLocked = false, wheelQuiet = null;
+addEventListener('wheel', e => {
+  if (!paged() || e.ctrlKey || $('#lightbox').classList.contains('open')) return;
+  if (e.target.closest('.chat-body')) return;
+  e.preventDefault();
+  // Un gesto = una diapositiva: se libera tras 180 ms sin eventos (inercia del touchpad incluida).
+  clearTimeout(wheelQuiet);
+  wheelQuiet = setTimeout(() => { wheelLocked = false; wheelAcc = 0; }, 180);
+  if (wheelLocked) return;
+  wheelAcc += e.deltaY;
+  if (Math.abs(wheelAcc) > 30){ wheelLocked = true; step(Math.sign(wheelAcc)); wheelAcc = 0; }
+}, {passive:false});
+
+let touchY = null;
+addEventListener('touchstart', e => { touchY = e.touches[0].clientY; }, {passive:true});
+addEventListener('touchmove', e => { if (paged() && !e.target.closest('.chat-body')) e.preventDefault(); }, {passive:false});
+addEventListener('touchend', e => {
+  if (!paged() || touchY === null) return;
+  const dy = touchY - e.changedTouches[0].clientY; touchY = null;
+  if (Math.abs(dy) > 50) step(Math.sign(dy));
+});
+
+// Si se arrastra la barra o cambia el tamaño, se acomoda en la diapositiva más cercana.
+let scrollIdle = null;
+addEventListener('scroll', () => {
+  if (!paged() || animating) return;
+  clearTimeout(scrollIdle);
+  scrollIdle = setTimeout(() => { const i = Math.min(slides.length-1, Math.round(scrollY / innerHeight)); if (Math.abs(slides[i].offsetTop - scrollY) > 2) go(i); }, 200);
+}, {passive:true});
+addEventListener('resize', () => { if (paged()) scrollTo(0, slides[current].offsetTop); });
+
 addEventListener('keydown', e => {
   if ($('#lightbox').classList.contains('open')){ if (e.key === 'Escape') $('#lightbox').classList.remove('open'); return; }
   const onLive = slides[current].id === 'live';
   if (onLive && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); playNext(); return; }
-  if (['ArrowDown','PageDown','ArrowRight',' '].includes(e.key)){ e.preventDefault(); go(current+1); }
-  if (['ArrowUp','PageUp','ArrowLeft'].includes(e.key)){ e.preventDefault(); go(current-1); }
+  if (['ArrowDown','PageDown','ArrowRight',' '].includes(e.key)){ e.preventDefault(); step(1); }
+  if (['ArrowUp','PageUp','ArrowLeft'].includes(e.key)){ e.preventDefault(); step(-1); }
   if (e.key === 'Home'){ e.preventDefault(); go(0); }
   if (e.key === 'End'){ e.preventDefault(); go(slides.length-1); }
 });
+
+/* ====================== TOOLS FLOTANTES (diapositiva 10) ====================== */
+const ICONS = {
+  search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  grape:'<circle cx="9" cy="10" r="3"/><circle cx="15" cy="10" r="3"/><circle cx="12" cy="15.5" r="3"/><path d="M12 7V3l3-1"/>',
+  cloud:'<path d="M17 18H8a4 4 0 1 1 1-7.9A5 5 0 0 1 18.5 11 3.5 3.5 0 0 1 17 18z"/>',
+  alert:'<path d="M12 3l9.5 17h-19z"/><path d="M12 10v4M12 17.5h.01"/>',
+  bulb:'<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/>',
+  bell:'<path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
+  check:'<path d="M4 12.5l5 5L20 6.5"/>',
+  flask:'<path d="M9 3h6M10 3v6L4.5 19.2A1.2 1.2 0 0 0 5.6 21h12.8a1.2 1.2 0 0 0 1.1-1.8L14 9V3"/><path d="M7 15h10"/>',
+  pencil:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
+  eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  drop:'<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/>',
+  bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+  bars:'<path d="M5 20V11M11 20V5M17 20v-7M3 20h18"/>',
+  book:'<path d="M4 5a2 2 0 0 1 2-2h12v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h12v-3"/>',
+  list:'<path d="M9 6h12M9 12h12M9 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
+  wine:'<path d="M8 3h8l-.8 6.5a3.2 3.2 0 0 1-6.4 0z"/><path d="M12 13v8M8 21h8"/>',
+  compass:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+  bookmark:'<path d="M6 3h12v18l-6-4-6 4z"/>',
+  trash:'<path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14"/>',
+};
+const TOOLS = [
+  ['search_knowledge','search'], ['list_my_parcelas','grid'], ['get_maturity_indicators','grape'], ['get_weather','cloud'],
+  ['detect_disease_risk','alert'], ['recommend_action','bulb'], ['list_recent_alerts','bell'], ['respond_decision','check'],
+  ['record_maturity_reading','flask'], ['annotate_maturity_reading','pencil'], ['record_field_monitoring','eye'], ['record_irrigation','drop'],
+  ['record_adverse_event','bolt'], ['record_yield_estimate','bars'], ['update_vineyard_log','book'], ['get_registration_catalog','list'],
+  ['get_wine_batch_status','wine'], ['navigate_screen','compass'], ['record_memory','bookmark'], ['forget_memory','trash'],
+];
+(function toolSky(){
+  const sky = $('#tool-sky'); if (!sky) return;
+  const slide = sky.closest('.slide');
+  const svg = k => `<svg viewBox="0 0 24 24">${ICONS[k]}</svg>`;
+  const items = [];
+  const add = (html, cls) => { const el = document.createElement('span'); el.className = cls; el.innerHTML = html; sky.appendChild(el); items.push({el}); };
+  TOOLS.forEach(([name, icon]) => { add(svg(icon) + name, 'tool-name' + (name === 'search_knowledge' ? ' k' : '')); add(svg(icon), 'tool-ico'); });
+  let W = 0, H = 0;
+  const draw = it => { it.el.style.transform = `translate3d(${it.x}px,${it.y}px,0)`; };
+  const layout = () => {
+    W = slide.clientWidth; H = slide.clientHeight;
+    items.forEach(it => {
+      it.w = it.el.offsetWidth; it.h = it.el.offsetHeight;
+      if (it.x === undefined){
+        it.x = Math.random() * (W - it.w); it.y = Math.random() * (H - it.h);
+        const a = Math.random() * Math.PI * 2, v = .12 + Math.random() * .22;
+        it.vx = Math.cos(a) * v; it.vy = Math.sin(a) * v;
+      }
+      it.x = Math.min(Math.max(0, it.x), W - it.w); it.y = Math.min(Math.max(0, it.y), H - it.h);
+      draw(it);
+    });
+  };
+  layout(); addEventListener('resize', layout); addEventListener('load', layout);
+  if (document.fonts) document.fonts.ready.then(layout);
+  if (reduced) return;
+  let last = performance.now();
+  (function frame(t = last){
+    const dt = Math.min(50, t - last) / 16.67; last = t;
+    if (slides[current] === slide || slides[target] === slide){
+      for (const it of items){
+        it.x += it.vx * dt; it.y += it.vy * dt;
+        if (it.x < 0){ it.x = 0; it.vx = Math.abs(it.vx); } else if (it.x > W - it.w){ it.x = W - it.w; it.vx = -Math.abs(it.vx); }
+        if (it.y < 0){ it.y = 0; it.vy = Math.abs(it.vy); } else if (it.y > H - it.h){ it.y = H - it.h; it.vy = -Math.abs(it.vy); }
+        draw(it);
+      }
+    }
+    requestAnimationFrame(frame);
+  })();
+})();
 
 /* #12 en la URL abre directamente esa diapositiva. */
 addEventListener('load', () => { const n = parseInt(location.hash.slice(1), 10); if (n) slides[Math.min(slides.length, n) - 1].scrollIntoView(); });
@@ -850,7 +936,7 @@ slides.forEach(slide => {
     onEnter: () => {
       if (reduced){ gsap.set(pops,{opacity:1}); typed.forEach(el => el.style.visibility=''); if (slide.querySelector('#bank')) drawBank(); return; }
       // Zoom de cámara con desenfoque.
-      gsap.fromTo(content, {scale:1.06, filter:'blur(10px)'}, {scale:1, filter:'blur(0px)', duration:1.1, ease:EASE, clearProps:'filter,transform'});
+      gsap.fromTo(content, {scale:1.04, filter:'blur(6px)'}, {scale:1, filter:'blur(0px)', duration:1.1, ease:EASE, clearProps:'filter,transform'});
       typed.forEach(el => { el.style.visibility=''; const txt = el.dataset.type; typeText(el, txt, Math.max(18, Math.min(55, 1400/txt.length))); });
       // Pop con rebote, escalonado.
       if (pops.length) gsap.fromTo(pops, {opacity:0, scale:.6, y:16}, {opacity:1, scale:1, y:0, duration:.55, stagger:.08, delay:.25, ease:'back.out(2.2)',
