@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CosechIA · Presentación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="assets/vendor/tailwind-browser.js"></script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<style type="text/tailwindcss">
+@theme {
+  --font-display: 'Fraunces', ui-serif, Georgia, serif;
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --color-vine-50:#f0f5ee; --color-vine-100:#dae8d3; --color-vine-200:#b9d2a8; --color-vine-300:#8fb678; --color-vine-400:#6a9b52; --color-vine-500:#4d8238; --color-vine-600:#3a6829; --color-vine-700:#2e5322; --color-vine-800:#26421d; --color-vine-900:#1e3619; --color-vine-950:#0f1f0c;
+  --color-wine-300:#f5a8be; --color-wine-400:#e97098; --color-wine-500:#d64072; --color-wine-600:#be2758; --color-wine-700:#9d1b48; --color-wine-900:#6f1939; --color-wine-950:#3f0a1c;
+  --color-amber-honey-200:#f3d98c; --color-amber-honey-300:#edbf4d; --color-amber-honey-400:#e9a724; --color-amber-honey-500:#d98a14; --color-amber-honey-700:#954a12;
+  --color-bordeaux-400:#db8389; --color-bordeaux-600:#ae3942; --color-bordeaux-700:#6b1f24; --color-bordeaux-950:#2a0a0c;
+  --color-ink-100:#ebedf3; --color-ink-200:#d3d8e3; --color-ink-300:#aab2c6; --color-ink-400:#7c87a5; --color-ink-500:#5c6788; --color-ink-700:#3a4159; --color-ink-800:#323849; --color-ink-900:#1d2130; --color-ink-950:#11141f;
+  --color-neon:#80b148;
+  --color-lime:#e4f04f;
+}
+</style>
+<style>
+:root{
+  --bg:#0b1309; --bg-2:#101014; --text:#e8f0e2; --muted:#a9b8a0; --primary:#80b148; --lime:#e4f04f;
+  --glass:rgba(16,28,13,.55); --glass-border:rgba(185,210,168,.16);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.slide{position:relative;min-height:100vh;height:100vh;scroll-snap-align:start;overflow:hidden;display:flex;align-items:center;padding:72px 6vw 64px}
+.slide>.content{position:relative;z-index:2;width:100%;max-width:1320px;margin:0 auto}
+.bg-photo{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
+.bg-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,14,7,.78),rgba(8,14,7,.92))}
+.bg-aurora{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(60% 55% at 15% 20%,rgba(190,39,88,.38),transparent 70%),
+  radial-gradient(50% 50% at 85% 25%,rgba(233,167,36,.25),transparent 70%),
+  radial-gradient(70% 60% at 60% 100%,rgba(128,177,72,.25),transparent 70%),
+  #0d0a10}
+.bg-deep{position:absolute;inset:0;z-index:0;background:radial-gradient(80% 70% at 70% 30%,rgba(77,130,56,.22),transparent 70%),var(--bg)}
+#net{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.35;transition:opacity .8s var(--ease)}
+.glass{background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(14px) saturate(130%);-webkit-backdrop-filter:blur(14px) saturate(130%);border-radius:20px}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary)}
+.h-display{font-family:var(--font-display);font-weight:600;line-height:1.02;letter-spacing:-.02em}
+.neon{color:var(--primary);text-shadow:0 0 24px rgba(128,177,72,.55)}
+.neon-wine{color:#f5a8be;text-shadow:0 0 24px rgba(214,64,114,.55)}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;padding:4px 10px;border-radius:999px;border:1px solid var(--glass-border);background:rgba(255,255,255,.04);color:var(--muted)}
+.num-chip{font-family:var(--font-mono);font-size:12px;color:var(--lime);border:1px solid rgba(228,240,79,.35);border-radius:8px;padding:2px 8px}
+.muted{color:var(--muted)}
+.pop{opacity:0}
+.fig{cursor:zoom-in;border-radius:14px;background:#fff;padding:10px;max-height:62vh;object-fit:contain;width:100%;box-shadow:0 30px 80px -30px rgba(0,0,0,.8)}
+.fig-cap{font-size:12px;color:var(--muted);margin-top:8px;font-family:var(--font-mono)}
+.type-caret::after{content:"";display:inline-block;width:.08em;height:.9em;margin-left:.05em;background:var(--primary);vertical-align:-.08em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* Pie y progreso */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:50;background:linear-gradient(90deg,var(--primary),var(--lime));box-shadow:0 0 12px var(--primary);transition:width .6s var(--ease)}
+#footer{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:14px 6vw;font-family:var(--font-mono);font-size:12px;color:var(--muted);pointer-events:none}
+#footer .brand{display:flex;align-items:center;gap:10px}
+#footer img{height:18px;opacity:.85}
+#counter b{color:var(--text);font-weight:500}
+
+/* Lightbox */
+#lightbox{position:fixed;inset:0;z-index:100;background:rgba(5,8,4,.92);display:none;align-items:center;justify-content:center;padding:3vh 3vw;cursor:zoom-out}
+#lightbox.open{display:flex}
+#lightbox img{max-width:100%;max-height:100%;background:#fff;border-radius:12px;padding:12px}
+
+/* Orbe de Vini (réplica de ViniOrb.vue) */
+.orb{--s:36px;position:relative;display:inline-block;width:var(--s);height:var(--s);flex-shrink:0}
+.orb .pulse,.orb .orbit,.orb .sat{position:absolute;inset:0}
+.orb .sphere{position:absolute;inset:0;border-radius:50%;overflow:hidden;isolation:isolate;background:rgba(232,236,242,.55);box-shadow:0 0 0 1px rgba(255,255,255,.6),0 calc(var(--s)*.06) calc(var(--s)*.17) calc(var(--s)*-.06) rgba(90,100,130,.35)}
+.orb .colors{position:absolute;inset:10%;border-radius:50%;background:radial-gradient(circle at 50% 60%,#eaf29d 0%,#568142 55%,rgba(86,129,66,0) 80%);filter:blur(calc(var(--s)*.054)) saturate(125%);animation:orb-rot 16s linear infinite}
+.orb .blob{position:absolute;border-radius:50%}
+.orb .b1{width:78%;height:62%;top:0;left:6%;background:radial-gradient(circle at 60% 62%,#46703a 0%,#568142 40%,rgba(86,129,66,0) 72%);animation:orb-f1 9s ease-in-out infinite alternate}
+.orb .b2{width:50%;height:45%;top:4%;left:0;background:radial-gradient(circle,#568142 0%,rgba(86,129,66,0) 70%);animation:orb-f2 11s ease-in-out infinite alternate}
+.orb .b3{width:82%;height:70%;top:30%;left:22%;background:radial-gradient(circle,#e4f04f 0%,#eaf29d 35%,rgba(234,242,157,0) 72%);animation:orb-f3 10s ease-in-out infinite alternate}
+.orb .b4{width:70%;height:55%;top:50%;left:4%;background:radial-gradient(circle,#fbfdde 0%,rgba(251,253,222,0) 70%);animation:orb-f4 12s ease-in-out infinite alternate}
+.orb .gl{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(240,243,248,0) 56%,rgba(232,238,244,.7) 70%,rgba(248,249,252,.9) 84%,rgba(214,220,232,.9) 97%,#fff 100%),conic-gradient(from 200deg,rgba(255,200,230,.25),rgba(190,220,255,.25),rgba(200,255,230,.2),rgba(255,200,230,.25))}
+.orb .orbit{display:none;animation:orb-rot 1.4s linear infinite}
+.orb .spark{position:absolute;left:50%;top:-6%;width:max(3px,14%);height:max(3px,14%);border-radius:50%;background:#e4f04f;translate:-50% 0;box-shadow:0 0 0 1px rgba(86,129,66,.55),0 0 calc(var(--s)*.14) #e4f04f;animation:orb-spark .75s ease-in-out infinite}
+.orb.thinking .orbit{display:block}
+.orb.thinking .pulse{animation:orb-beat 1.1s ease-in-out infinite}
+.orb.thinking .colors{animation-duration:6.4s}
+.orb.thinking::before{content:"";position:absolute;inset:-35%;border-radius:50%;background:radial-gradient(circle,rgba(128,177,72,.55),transparent 65%);animation:halo 1.1s ease-in-out infinite}
+@keyframes orb-rot{to{transform:rotate(360deg)}}
+@keyframes orb-f1{to{transform:translate(18%,14%) scale(1.1)}}
+@keyframes orb-f2{to{transform:translate(30%,40%) scale(.85)}}
+@keyframes orb-f3{to{transform:translate(-22%,-16%) scale(1.12)}}
+@keyframes orb-f4{to{transform:translate(28%,-24%) scale(.9)}}
+@keyframes orb-spark{0%,100%{opacity:.55;scale:.8}50%{opacity:1;scale:1.15}}
+@keyframes orb-beat{0%,100%{transform:scale(1)}15%{transform:scale(1.08)}30%{transform:scale(.97)}45%{transform:scale(1.05)}70%{transform:scale(1)}}
+@keyframes halo{0%,100%{opacity:.35;transform:scale(.9)}50%{opacity:.9;transform:scale(1.1)}}
+
+/* Chat de Vini */
+.chat{display:flex;flex-direction:column;height:min(70vh,640px);border-radius:22px;overflow:hidden;background:rgba(12,18,12,.72);border:1px solid var(--glass-border);backdrop-filter:blur(16px);box-shadow:0 40px 120px -40px rgba(128,177,72,.35)}
+.chat-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.06)}
+.chat-body{flex:1;overflow-y:auto;padding:18px 14px;display:flex;flex-direction:column;gap:14px;scrollbar-width:thin}
+.msg{display:flex;gap:10px;align-items:flex-start}
+.msg.user{justify-content:flex-end}
+.bubble{border-radius:18px;padding:10px 15px;font-size:14px;line-height:1.55;max-width:82%}
+.msg.user .bubble{background:linear-gradient(135deg,#3a6829,#26421d);color:#fff;border-top-right-radius:6px;max-width:75%}
+.msg.agent .bubble{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-top-left-radius:6px;color:#e6ece1}
+.bubble ul{margin:6px 0 2px;padding-left:18px}
+.bubble li{margin:2px 0}
+.bubble li.sub{margin-left:16px;list-style:circle}
+.cite{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:10px;padding:1px 6px;margin:0 2px;border-radius:6px;background:rgba(128,177,72,.14);color:#b9d2a8;border:1px solid rgba(128,177,72,.28);white-space:nowrap;vertical-align:1px}
+.tool-chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10.5px;padding:4px 9px;border-radius:7px;background:rgba(233,167,36,.1);color:#edbf4d;border:1px solid rgba(233,167,36,.25)}
+.tool-chip .spin{width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(237,191,77,.3);border-top-color:#edbf4d;animation:orb-rot .7s linear infinite}
+.tool-chip.done .spin{display:none}
+.msg-time{display:block;font-size:10px;color:#7c87a5;margin-top:4px}
+.chat-input{display:flex;align-items:center;gap:8px;margin:10px 12px 12px;padding:9px 12px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);font-size:14px;min-height:44px}
+.chat-input .ph{flex:1;color:#e8f0e2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-input .ph.empty{color:rgba(255,255,255,.35)}
+.send-btn{position:relative;background:#80b148;color:#0f1f0c;border-radius:9px;width:32px;height:32px;display:grid;place-items:center;box-shadow:0 0 16px -2px rgba(128,177,72,.55);flex-shrink:0}
+.ripple{position:absolute;inset:0;border-radius:9px;border:2px solid #e4f04f;pointer-events:none}
+#cursor{position:fixed;z-index:80;width:22px;height:22px;pointer-events:none;opacity:0;left:0;top:0}
+.qdot{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-family:var(--font-mono);font-size:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.03);color:var(--muted);cursor:pointer;transition:all .3s var(--ease)}
+.qdot.active{border-color:var(--primary);color:var(--text);box-shadow:0 0 0 3px rgba(128,177,72,.2)}
+.qdot.s2{background:rgba(128,177,72,.22);color:#dae8d3}
+.qdot.s1{background:rgba(233,167,36,.2);color:#f3d98c}
+.qdot.s0{background:rgba(214,64,114,.2);color:#f5a8be}
+.score{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;font-family:var(--font-mono);font-weight:500}
+.score.s2{background:rgba(128,177,72,.25);color:#dae8d3;border:1px solid rgba(128,177,72,.5)}
+.score.s1{background:rgba(233,167,36,.2);color:#f3d98c;border:1px solid rgba(233,167,36,.45)}
+.score.s0{background:rgba(214,64,114,.2);color:#f5a8be;border:1px solid rgba(214,64,114,.45)}
+.timer{font-family:var(--font-mono);font-size:40px;font-weight:500;letter-spacing:-.02em}
+.pending-tag{font-family:var(--font-mono);font-size:10.5px;color:#f3d98c;border:1px dashed rgba(233,167,36,.6);padding:3px 8px;border-radius:7px}
+
+/* Flujo y ciclo */
+.stage{position:relative;padding:14px 12px;border-radius:16px;text-align:center}
+.stage .dot{width:14px;height:14px;border-radius:50%;margin:0 auto 10px;background:var(--primary);box-shadow:0 0 16px var(--primary)}
+.connector{position:absolute;top:21px;left:7%;right:7%;height:2px;background:linear-gradient(90deg,rgba(128,177,72,.1),rgba(128,177,72,.7),rgba(228,240,79,.8));transform-origin:left;box-shadow:0 0 10px rgba(128,177,72,.6)}
+.shot{border-radius:14px;overflow:hidden;border:1px solid var(--glass-border);background:rgba(255,255,255,.03)}
+.shot .bar{display:flex;gap:5px;padding:8px 10px;background:rgba(255,255,255,.05)}
+.shot .bar i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18)}
+.shot{margin:0;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.shot:hover{transform:translateY(-4px);box-shadow:0 24px 60px -24px rgba(128,177,72,.5)}
+.shot img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top left;cursor:zoom-in}
+.shot figcaption{padding:10px 12px;font-size:12.5px;color:var(--muted)}
+.cap-hero{display:block;width:100%;border-radius:14px;border:1px solid var(--glass-border);cursor:zoom-in;box-shadow:0 30px 80px -30px rgba(0,0,0,.8)}
+@media (max-width: 900px){
+  html{scroll-snap-type:none}
+  .slide{height:auto;min-height:100vh;padding:72px 16px 64px}
+  .chat{height:60vh}
+}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<canvas id="net"></canvas>
+<svg id="cursor" viewBox="0 0 24 24"><path d="M4 2l15 10-6.5 1.5L16 21l-3 1.5-3.5-7.5L4 19z" fill="#fff" stroke="#0f1f0c" stroke-width="1.4" stroke-linejoin="round"/></svg>
+<div id="lightbox"><img alt=""></div>
+<div id="footer"><div class="brand"><img src="assets/img/cia-blanco.png" alt=""><span id="sec-name">Portada</span></div><div id="counter"><b>01</b> / 20</div></div>
+
+<!-- 01 PORTADA -->
+<section class="slide" data-name="Portada" data-net="0.75">
+  <div class="bg-photo" style="background-image:url(assets/img/valle-panoramica.jpg)"></div>
+  <div class="content grid lg:grid-cols-[1.25fr_1fr] gap-12 items-center">
+    <div>
+      <div class="eyebrow mb-6 pop">Estadía · Universidad Tecnológica de Tijuana · 5.º B</div>
+      <h1 class="h-display text-6xl md:text-8xl mb-6"><span data-type="CosechIA">CosechIA</span></h1>
+      <p class="text-xl md:text-2xl text-vine-100/90 max-w-xl pop">Gestión del viñedo y la bodega en Baja California, con <span class="neon">Vini</span>, un agente de IA que responde con tus datos y con fuentes.</p>
+      <div class="mt-10 flex flex-wrap gap-3 pop">
+        <span class="chip">Albares Reyes Omar</span><span class="chip">Chavez Almanza Imelda Gpe.</span>
+      </div>
+    </div>
+    <div class="flex justify-center pop">
+      <div class="relative">
+        <div class="orb thinking" style="--s:260px"><span class="pulse"><span class="sphere"><span class="colors"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span></span><span class="gl"></span></span></span><span class="orbit"><span class="sat"><span class="spark"></span></span><span class="sat" style="transform:rotate(120deg)"><span class="spark" style="animation-delay:-.25s"></span></span><span class="sat" style="transform:rotate(240deg)"><span class="spark" style="animation-delay:-.5s"></span></span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 PROBLEMA -->
+<section class="slide" data-name="Problema" data-net="0.25">
+  <div class="bg-photo" style="background-image:url(assets/img/3-registro-campo.jpeg)"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop">01 · El problema</div>
+    <h2 class="h-display text-5xl md:text-6xl max-w-4xl mb-12"><span data-type="La información del viñedo está dispersa y la decisión de cosechar llega tarde.">La información del viñedo está dispersa y la decisión de cosechar llega tarde.</span></h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass p-7 pop"><span class="num-chip">01</span><h3 class="font-display text-2xl mt-5 mb-3">Registros en papel</h3><p class="muted">Lecturas, labores, riegos y plagas quedan en libretas, hojas de cálculo y mensajes, sin parcela ni fecha que los una.</p></div>
+      <div class="glass p-7 pop"><span class="num-chip">02</span><h3 class="font-display text-2xl mt-5 mb-3">Madurez sin contexto</h3><p class="muted">El Brix, el pH y la acidez se miden, pero no se comparan con el óptimo de la variedad en su valle ni con el clima.</p></div>
+      <div class="glass p-7 pop"><span class="num-chip">03</span><h3 class="font-display text-2xl mt-5 mb-3">Conocimiento en PDF</h3><p class="muted">Lo técnico (MANUALVID 2018, UABC y SEDAGRO) está en manuales que casi nadie consulta en el campo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 SOLUCIÓN -->
+<section class="slide" data-name="Solución" data-net="0.3">
+  <div class="bg-deep"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop">02 · La solución</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-10"><span data-type="Un solo lugar, del surco a la botella.">Un solo lugar, del surco a la botella.</span></h2>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="glass overflow-hidden pop"><div class="h-32 bg-cover bg-center" style="background-image:url(assets/img/1-dashboard-vinedo-panorama.jpeg)"></div><div class="p-5"><h3 class="font-display text-xl mb-1">Monitoreo del viñedo</h3><p class="muted text-sm">Dashboard, atlas de parcelas y clima por valle.</p></div></div>
+      <div class="glass overflow-hidden pop"><div class="h-32 bg-cover bg-center" style="background-image:url(assets/img/2-medicion-brix-uva.jpg)"></div><div class="p-5"><h3 class="font-display text-xl mb-1">Madurez de la uva</h3><p class="muted text-sm">Brix, pH y acidez por parcela, con semáforo y etapas fenológicas.</p></div></div>
+      <div class="glass overflow-hidden pop"><div class="h-32 bg-cover bg-center" style="background-image:url(assets/img/3-registro-campo.jpeg)"></div><div class="p-5"><h3 class="font-display text-xl mb-1">Bitácora de campo</h3><p class="muted text-sm">Labores, sanidad, riegos, estimación de cosecha y eventos adversos.</p></div></div>
+      <div class="glass overflow-hidden pop"><div class="h-32 bg-cover bg-center" style="background-image:url(assets/img/4-bodegas.png)"></div><div class="p-5"><h3 class="font-display text-xl mb-1">Bodega y trazabilidad</h3><p class="muted text-sm">Lotes de uva y de vino, fermentación, trasiego, coupage y embotellado.</p></div></div>
+      <div class="glass overflow-hidden pop"><div class="h-32 bg-cover bg-center relative" style="background-image:url(assets/img/5-vini-background.jpg)"></div><div class="p-5"><h3 class="font-display text-xl mb-1 neon">Vini, el agente</h3><p class="muted text-sm">Responde con tus datos y con fuentes; propone y tú apruebas.</p></div></div>
+      <div class="glass overflow-hidden pop"><div class="h-32 bg-cover bg-center" style="background-image:url(assets/img/6-documentacion.jpeg)"></div><div class="p-5"><h3 class="font-display text-xl mb-1">Catálogos de B.C.</h3><p class="muted text-sm">Variedades, valles, etapas, plagas, productos y suelos.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 USUARIOS -->
+<section class="slide" data-name="Usuarios" data-net="0.35">
+  <div class="bg-deep"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop">03 · Quién lo usa</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-12"><span data-type="Tres actores, un mismo viñedo.">Tres actores, un mismo viñedo.</span></h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass p-8 pop float"><span class="num-chip">01</span><h3 class="font-display text-3xl mt-6 mb-3">Administrador</h3><p class="muted">Da de alta viticultores, viñedos, bodegas y recipientes; mantiene los catálogos y la base de conocimiento; revisa las reglas del agente.</p></div>
+      <div class="glass p-8 pop float"><span class="num-chip">02</span><h3 class="font-display text-3xl mt-6 mb-3">Viticultor</h3><p class="muted">Registra lecturas y labores, consulta su dashboard, recibe la uva en bodega y sigue cada lote de vino hasta su origen.</p></div>
+      <div class="glass p-8 pop float" style="border-color:rgba(128,177,72,.45);box-shadow:0 0 60px -20px rgba(128,177,72,.6)"><div class="flex items-center gap-3"><span class="num-chip">03</span><div class="orb" style="--s:30px"><span class="pulse"><span class="sphere"><span class="colors"><span class="blob b1"></span><span class="blob b3"></span><span class="blob b4"></span></span><span class="gl"></span></span></span></div></div><h3 class="font-display text-3xl mt-6 mb-3 neon">Vini</h3><p class="muted">Agente de IA con 20 herramientas: consulta datos, busca en los manuales, detecta riesgos y propone registros que el viticultor aprueba.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 CONTEXTO -->
+<section class="slide" data-name="Contexto" data-net="0.3">
+  <div class="bg-deep"></div>
+  <div class="content grid lg:grid-cols-[1fr_1.6fr] gap-10 items-center">
+    <div>
+      <div class="eyebrow mb-4 pop">04 · Contexto</div>
+      <h2 class="h-display text-5xl mb-6"><span data-type="CosechIA y su entorno">CosechIA y su entorno</span></h2>
+      <p class="muted text-lg pop">El sistema se conecta con los usuarios, con el servicio de clima (Open-Meteo), con el modelo de lenguaje, con el servicio de embeddings y con el correo para las notificaciones.</p>
+    </div>
+    <figure class="pop"><img class="fig" src="assets/fig/fig01.png" alt="Diagrama de contexto"><figcaption class="fig-cap">Fig. 1 · Diagrama de contexto de CosechIA</figcaption></figure>
+  </div>
+</section>
+
+<!-- 06 MAPA FUNCIONAL -->
+<section class="slide" data-name="Áreas funcionales" data-net="0.3">
+  <div class="bg-deep"></div>
+  <div class="content grid lg:grid-cols-[1fr_1.6fr] gap-10 items-center">
+    <div>
+      <div class="eyebrow mb-4 pop">05 · Alcance</div>
+      <h2 class="h-display text-5xl mb-6"><span data-type="7 áreas funcionales">7 áreas funcionales</span></h2>
+      <ul class="space-y-2 text-lg">
+        <li class="pop"><span class="num-chip mr-3">01</span>Cuentas y acceso</li>
+        <li class="pop"><span class="num-chip mr-3">02</span>Monitoreo del viñedo</li>
+        <li class="pop"><span class="num-chip mr-3">03</span>Registros de campo</li>
+        <li class="pop"><span class="num-chip mr-3">04</span>Cosecha</li>
+        <li class="pop"><span class="num-chip mr-3">05</span>Bodega y trazabilidad</li>
+        <li class="pop"><span class="num-chip mr-3">06</span>Vini y conocimiento</li>
+        <li class="pop"><span class="num-chip mr-3">07</span>Administración</li>
+      </ul>
+    </div>
+    <figure class="pop"><img class="fig" src="assets/fig/fig03.png" alt="Mapa funcional"><figcaption class="fig-cap">Fig. 3 · Mapa funcional de CosechIA</figcaption></figure>
+  </div>
+</section>
+
+<!-- 07 CICLO DE LA VID -->
+<section class="slide" data-name="Ciclo de la vid" data-net="0.3">
+  <div class="bg-photo" style="background-image:url(assets/img/2-medicion-brix-uva.jpg)"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop">06 · Fenología</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-12"><span data-type="La parcela sigue el ciclo de la vid.">La parcela sigue el ciclo de la vid.</span></h2>
+    <div class="relative grid grid-cols-7 gap-2 mb-10" id="cycle">
+      <div class="connector"></div>
+      <div class="stage pop"><div class="dot"></div><div class="font-display text-lg">Dormancia</div><div class="muted text-xs mt-1">nov – abr</div></div>
+      <div class="stage pop"><div class="dot"></div><div class="font-display text-lg">Brotación</div><div class="muted text-xs mt-1">abr</div></div>
+      <div class="stage pop"><div class="dot"></div><div class="font-display text-lg">Floración</div><div class="muted text-xs mt-1">jun</div></div>
+      <div class="stage pop"><div class="dot"></div><div class="font-display text-lg">Cuajado</div><div class="muted text-xs mt-1">jun – jul</div></div>
+      <div class="stage pop"><div class="dot"></div><div class="font-display text-lg">Envero</div><div class="muted text-xs mt-1">jul – ago</div></div>
+      <div class="stage pop"><div class="dot"></div><div class="font-display text-lg">Madurez</div><div class="muted text-xs mt-1">ago – sep</div></div>
+      <div class="stage pop"><div class="dot" style="background:var(--lime);box-shadow:0 0 18px var(--lime)"></div><div class="font-display text-lg">Vendimia</div><div class="muted text-xs mt-1">ago – oct</div></div>
+    </div>
+    <div class="grid md:grid-cols-[1fr_1.2fr] gap-8 items-center">
+      <p class="muted text-lg pop">Cada etapa cambia lo que el sistema muestra y lo que Vini recomienda: en floración vigila mildiu y oídio; en madurez compara Brix, pH y acidez con el óptimo de la variedad.</p>
+      <figure class="pop"><img class="fig" style="max-height:30vh" src="assets/fig/fig14.png" alt="Diagrama de estados"><figcaption class="fig-cap">Fig. 14 · Ciclo de la parcela y etapas fenológicas</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 08 FLUJO -->
+<section class="slide" data-name="De la lectura al vino" data-net="0.35">
+  <div class="bg-deep"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop">07 · Flujo principal</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-12"><span data-type="De una lectura a un lote de vino.">De una lectura a un lote de vino.</span></h2>
+    <div class="relative grid grid-cols-2 md:grid-cols-6 gap-3 mb-10" id="flow">
+      <div class="connector hidden md:block"></div>
+      <div class="stage glass pop"><div class="dot"></div><div class="font-display text-lg">Lectura</div><div class="muted text-xs mt-1">Brix · pH · AT</div></div>
+      <div class="stage glass pop"><div class="dot" style="background:#e9a724;box-shadow:0 0 16px #e9a724"></div><div class="font-display text-lg">Semáforo</div><div class="muted text-xs mt-1">vs. óptimo</div></div>
+      <div class="stage glass pop"><div class="dot"></div><div class="font-display text-lg">Recomendación</div><div class="muted text-xs mt-1">Vini propone</div></div>
+      <div class="stage glass pop"><div class="dot"></div><div class="font-display text-lg">Cosecha</div><div class="muted text-xs mt-1">plazo de seguridad</div></div>
+      <div class="stage glass pop"><div class="dot" style="background:#d64072;box-shadow:0 0 16px #d64072"></div><div class="font-display text-lg">Bodega</div><div class="muted text-xs mt-1">lote de uva</div></div>
+      <div class="stage glass pop"><div class="dot" style="background:var(--lime);box-shadow:0 0 18px var(--lime)"></div><div class="font-display text-lg">Lote de vino</div><div class="muted text-xs mt-1">trazable</div></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <figure class="pop"><img class="fig" style="max-height:32vh" src="assets/fig/fig15.png" alt=""><figcaption class="fig-cap">Fig. 15 · Registro de cosecha con plazo de seguridad</figcaption></figure>
+      <figure class="pop"><img class="fig" style="max-height:32vh" src="assets/fig/fig19.png" alt=""><figcaption class="fig-cap">Fig. 19 · Recepción de uva en bodega</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 09 TRAZABILIDAD -->
+<section class="slide" data-name="Trazabilidad" data-net="0.3">
+  <div class="bg-photo" style="background-image:url(assets/img/4-bodegas.png)"></div>
+  <div class="content grid lg:grid-cols-[1fr_1.5fr] gap-10 items-center">
+    <div>
+      <div class="eyebrow mb-4 pop">08 · Trazabilidad</div>
+      <h2 class="h-display text-5xl mb-6"><span data-type="Cada botella sabe de qué parcela viene.">Cada botella sabe de qué parcela viene.</span></h2>
+      <p class="muted text-lg pop">Un lote de vino se rastrea hacia atrás: ensamblajes, trasiegos, fermentación, lote de uva, cosecha y la parcela con sus lecturas y tratamientos.</p>
+    </div>
+    <div class="grid grid-cols-[1.15fr_1fr] gap-5 items-center">
+      <figure class="pop"><img class="cap-hero zoomable" style="max-height:62vh;object-fit:cover;object-position:top" src="assets/cap/crop-trazabilidad.png" data-full="assets/cap/trazabilidad.png" alt="Ficha de trazabilidad"><figcaption class="fig-cap">Ficha de trazabilidad de LotVin-BE-2026-002-E01</figcaption></figure>
+      <figure class="pop"><img class="fig" style="max-height:52vh" src="assets/fig/fig17.png" alt=""><figcaption class="fig-cap">Fig. 17 · Trazabilidad hasta su origen</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 10 VINI RAG -->
+<section class="slide" data-name="Vini · Cómo responde" data-net="0.9" data-ai>
+  <div class="bg-aurora"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop" style="color:#f5a8be">09 · Inteligencia artificial</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-10"><span data-type="Vini no adivina: busca, cita y responde.">Vini no adivina: busca, cita y responde.</span></h2>
+    <div class="grid lg:grid-cols-[1.3fr_1fr] gap-8 items-start">
+      <div class="space-y-3" id="rag">
+        <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">01</span><div><b>DomainGuard</b> <span class="muted">· filtra lo que no es viticultura sin llamar al modelo</span></div></div>
+        <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">02</span><div><b>El modelo elige una herramienta</b> <span class="muted">· 20 tools: datos de la cuenta, clima, riesgo, conocimiento…</span></div></div>
+        <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">03</span><div><b>Búsqueda híbrida</b> <span class="muted">· vectores (mxbai-embed-large, 1024 dim.) + BM25, fusionados</span></div></div>
+        <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">04</span><div><b>Fragmentos con la ruta de la sección</b> <span class="muted">· 247 de manuales + 166 de fichas</span></div></div>
+        <div class="glass p-4 flex gap-4 items-center pop" style="border-color:rgba(128,177,72,.5)"><span class="num-chip">05</span><div><b class="neon">Respuesta con citas</b> <span class="muted">· «MANUALVID 2018, p. 30»; sin fuente, lo dice</span></div></div>
+      </div>
+      <figure class="pop"><img class="fig" style="max-height:52vh" src="assets/fig/fig10.png" alt=""><figcaption class="fig-cap">Fig. 10 · Consulta a Vini con recuperación de conocimiento</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 11 METODOLOGÍA DE PRUEBAS -->
+<section class="slide" data-name="Pruebas · Método" data-net="0.8" data-ai>
+  <div class="bg-aurora"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop" style="color:#f5a8be">10 · Pruebas del agente</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-10"><span data-type="30 preguntas, una rúbrica, datos reales.">30 preguntas, una rúbrica, datos reales.</span></h2>
+    <div class="grid md:grid-cols-4 gap-5 mb-8">
+      <div class="glass p-6 pop"><div class="h-display text-6xl neon" data-count="30">0</div><div class="muted mt-2">preguntas con respuesta esperada y página de la fuente</div></div>
+      <div class="glass p-6 pop"><div class="h-display text-6xl neon" data-count="8">0</div><div class="muted mt-2">categorías, de fenología a fuera de dominio</div></div>
+      <div class="glass p-6 pop"><div class="h-display text-6xl neon" data-count="10">0</div><div class="muted mt-2">preguntas clave, corridas antes y después del arreglo</div></div>
+      <div class="glass p-6 pop"><div class="h-display text-6xl neon-wine">0–2</div><div class="muted mt-2">puntos por respuesta, más cita y tool correctas</div></div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="glass p-5 pop flex gap-4 items-center"><span class="score s2">2</span><div><b>Correcta</b><div class="muted text-sm">responde lo preguntado con datos correctos y citados</div></div></div>
+      <div class="glass p-5 pop flex gap-4 items-center"><span class="score s1">1</span><div><b>Parcial</b><div class="muted text-sm">cubre una parte o no da los números</div></div></div>
+      <div class="glass p-5 pop flex gap-4 items-center"><span class="score s0">0</span><div><b>Incorrecta</b><div class="muted text-sm">contradice la fuente, inventa o no responde</div></div></div>
+    </div>
+    <p class="muted text-sm mt-6 pop">Latencia medida en <code class="font-mono">turnos.latencia_ms</code> (ciclo modelo + herramientas). Todas las preguntas en una misma conversación con la cuenta de prueba, igual en las dos corridas; P26 y P28 se repitieron tras el arreglo de las tools. El banco completo se corrió en dos cuentas, una conversación por pregunta.</p>
+  </div>
+</section>
+
+<!-- 12 VINI EN VIVO -->
+<section class="slide" data-name="Pruebas · Vini en vivo" data-net="0.85" data-ai id="live">
+  <div class="bg-aurora"></div>
+  <div class="content grid lg:grid-cols-[1.25fr_1fr] gap-8 items-center">
+    <div>
+      <div class="chat">
+        <div class="chat-head">
+          <div class="orb" id="head-orb" style="--s:36px"><span class="pulse"><span class="sphere"><span class="colors"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span></span><span class="gl"></span></span></span><span class="orbit"><span class="sat"><span class="spark"></span></span><span class="sat" style="transform:rotate(120deg)"><span class="spark" style="animation-delay:-.25s"></span></span><span class="sat" style="transform:rotate(240deg)"><span class="spark" style="animation-delay:-.5s"></span></span></span></div>
+          <div><div class="font-display font-semibold">Vini</div><div class="text-[11px] text-vine-300 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-neon inline-block"></span><span id="head-status">En línea</span></div></div>
+          <div class="ml-auto chip">conversaciones 22, 78 y 80 · 18 y 19-nov-2026</div>
+        </div>
+        <div class="chat-body" id="chat-body"></div>
+        <div class="chat-input"><span class="ph empty" id="chat-ph">Pregúntale a Vini…</span><span class="send-btn" id="send-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </div>
+    </div>
+    <div>
+      <div class="eyebrow mb-3" style="color:#f5a8be">11 · Las 10 preguntas clave</div>
+      <div class="flex flex-wrap gap-2 mb-6" id="qdots"></div>
+      <div class="glass p-6" id="eval">
+        <div class="flex items-center justify-between mb-4"><span class="chip" id="ev-cat">—</span><span id="ev-pending"></span></div>
+        <div class="flex items-end gap-6 mb-5">
+          <div><div class="muted text-xs font-mono mb-1">LATENCIA</div><div class="timer" id="ev-timer">0.0 s</div></div>
+          <div class="pb-1"><div class="muted text-xs font-mono mb-1">TOOL</div><div id="ev-tool" class="font-mono text-sm text-amber-honey-300">—</div></div>
+        </div>
+        <div class="muted text-xs font-mono mb-1">ESPERADA</div>
+        <p id="ev-exp" class="mb-4 text-[15px]">—</p>
+        <div class="flex items-center gap-4 mb-3">
+          <div class="flex items-center gap-2"><span class="muted text-xs font-mono">ANTES</span><span class="score" id="ev-before">–</span></div>
+          <svg width="28" height="12" viewBox="0 0 28 12"><path d="M0 6h24M19 1l5 5-5 5" stroke="#80b148" stroke-width="1.6" fill="none"/></svg>
+          <div class="flex items-center gap-2"><span class="muted text-xs font-mono">AHORA</span><span class="score" id="ev-after">–</span></div>
+        </div>
+        <p id="ev-note" class="muted text-sm">—</p>
+      </div>
+      <div class="flex gap-3 mt-5">
+        <button id="btn-play" class="chip" style="color:#e8f0e2;border-color:rgba(128,177,72,.5);padding:8px 14px;cursor:pointer">▶ Siguiente pregunta <span class="muted">(Enter)</span></button>
+        <button id="btn-reset" class="chip" style="padding:8px 14px;cursor:pointer">↺ Reiniciar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 RESULTADOS -->
+<section class="slide" data-name="Pruebas · Resultados" data-net="0.75" data-ai>
+  <div class="bg-aurora"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop" style="color:#f5a8be">12 · Resultados</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-8"><span data-type="20 de 20 puntos en las preguntas clave.">20 de 20 puntos en las preguntas clave.</span></h2>
+    <div class="grid lg:grid-cols-[0.9fr_1.4fr_1fr] gap-5">
+      <div class="glass p-6 pop">
+        <div class="muted text-xs font-mono mb-3">CALIFICACIÓN (10 PREGUNTAS)</div>
+        <svg id="donut" viewBox="0 0 200 200" class="w-full max-w-[220px] mx-auto"></svg>
+        <div class="mt-4 space-y-1 text-sm">
+          <div class="flex justify-between"><span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-2" style="background:#80b148"></span>Correctas</span><b>10</b></div>
+          <div class="flex justify-between"><span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-2" style="background:#e9a724"></span>Parciales</span><b>0</b></div>
+          <div class="flex justify-between"><span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-2" style="background:#d64072"></span>Incorrectas</span><b>0</b></div>
+        </div>
+      </div>
+      <div class="glass p-6 pop">
+        <div class="flex justify-between items-baseline mb-3"><div class="muted text-xs font-mono">LATENCIA POR PREGUNTA (S)</div><div class="text-xs font-mono"><span class="muted">antes</span> <span class="inline-block w-2.5 h-2.5 rounded-sm align-middle" style="background:#5c6788"></span> &nbsp;<span class="muted">ahora</span> <span class="inline-block w-2.5 h-2.5 rounded-sm align-middle" style="background:#80b148"></span></div></div>
+        <svg id="lat" viewBox="0 0 520 250" class="w-full"></svg>
+        <div class="grid grid-cols-3 gap-3 mt-3 text-center">
+          <div><div class="h-display text-3xl neon">3.2 s</div><div class="muted text-xs">mediana ahora</div></div>
+          <div><div class="h-display text-3xl">3.7 s</div><div class="muted text-xs">p95 ahora</div></div>
+          <div><div class="h-display text-3xl text-ink-300">2.6 s</div><div class="muted text-xs">mediana antes</div></div>
+        </div>
+      </div>
+      <div class="glass p-6 pop">
+        <div class="muted text-xs font-mono mb-3">ACIERTOS POR CATEGORÍA</div>
+        <div id="cats" class="space-y-3"></div>
+      </div>
+    </div>
+    <p class="muted text-sm mt-5 pop">La latencia subió porque el historial creció de 8.7 k a 38 k tokens de entrada en la conversación. P26 y P28 se repitieron tras el arreglo de las tools, en conversaciones nuevas (8 k tokens). La pregunta 29 la resuelve DomainGuard sin llamar al modelo. <b class="text-vine-200">Banco completo (30 preguntas, 19-nov): 47 de 60 puntos en cada una de las dos cuentas.</b></p>
+  </div>
+</section>
+
+<!-- 14 ANTES / DESPUÉS -->
+<section class="slide" data-name="Pruebas · Antes y después" data-net="0.8" data-ai>
+  <div class="bg-aurora"></div>
+  <div class="content">
+    <div class="flex flex-wrap items-end justify-between gap-6 mb-8">
+      <div>
+        <div class="eyebrow mb-4 pop" style="color:#f5a8be">13 · Antes y después</div>
+        <h2 class="h-display text-5xl md:text-6xl"><span data-type="Dos arreglos: 60 % → 100 %.">Dos arreglos: 60 % → 100 %.</span></h2>
+      </div>
+      <div class="glass px-6 py-4 pop flex items-center gap-5">
+        <div class="text-center"><div class="h-display text-5xl text-ink-300"><span data-count="12">0</span><span class="text-2xl">/20</span></div><div class="muted text-xs">antes</div></div>
+        <svg width="40" height="16" viewBox="0 0 40 16"><path d="M0 8h34M28 2l6 6-6 6" stroke="#80b148" stroke-width="2" fill="none"/></svg>
+        <div class="text-center"><div class="h-display text-5xl neon"><span data-count="20">0</span><span class="text-2xl">/20</span></div><div class="muted text-xs">ahora</div></div>
+      </div>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-5">
+      <div class="glass p-5 pop">
+        <div class="flex justify-between mb-3"><span class="chip">P20 · Región de Winkler</span><span class="score s0">0</span></div>
+        <div class="msg agent"><div class="bubble" style="max-width:100%;font-size:13px">No tengo una fuente en CosechIA que indique la región de Winkler específica del Valle de Guadalupe…</div></div>
+        <div class="flex justify-between mt-4 mb-3"><span class="chip" style="color:#b9d2a8">ahora</span><span class="score s2">2</span></div>
+        <div class="msg agent"><div class="bubble" style="max-width:100%;font-size:13px">De acuerdo con el índice de Winkler, el resultado calculado para el Valle de Guadalupe cae en el <b>área V</b> <span class="cite">MANUALVID 2018, p. 17</span></div></div>
+      </div>
+      <div class="glass p-5 pop">
+        <div class="flex justify-between mb-3"><span class="chip">P1 · Estados fenológicos</span><span class="score s0">0</span></div>
+        <div class="msg agent"><div class="bubble" style="max-width:100%;font-size:13px">…el fragmento de texto disponible no los enumera detalladamente.</div></div>
+        <div class="flex justify-between mt-4 mb-3"><span class="chip" style="color:#b9d2a8">ahora</span><span class="score s2">2</span></div>
+        <div class="msg agent"><div class="bubble" style="max-width:100%;font-size:13px">…cuatro estados fenológicos principales <span class="cite">p. 30</span><ul><li><b>Brotación</b></li><li><b>Floración</b></li><li><b>Cuajado</b></li><li><b>Maduración</b></li></ul></div></div>
+      </div>
+      <div class="glass p-5 pop" style="border-color:rgba(233,167,36,.4)">
+        <div class="eyebrow mb-3" style="color:#edbf4d">Causa y arreglo</div>
+        <ul class="space-y-3 text-[14px]">
+          <li><b>P20:</b> Vini reescribió la consulta; ganó la p. 12 (0.712) y la p. 17 de Winkler (0.707) quedó fuera porque solo entraba <b>una sección por documento</b>.</li>
+          <li><b>P1:</b> la intro de la sección decía «se distinguen cuatro» pero los nombres estaban en subsecciones.</li>
+          <li class="pt-2 border-t border-white/10"><span class="neon">Arreglo 1:</span> hasta 2 secciones más por documento si quedan a ≤ 0.05 de la elegida, y las intros cortas listan sus subsecciones.</li>
+          <li class="muted text-xs font-mono">413 fragmentos reindexados · 120/120 pruebas</li>
+          <li class="pt-2 border-t border-white/10"><b>P26 y P28:</b> las tools no comparaban con el óptimo de la variedad ni usaban el clima del valle. <span class="neon">Arreglo 2:</span> lo hacen y Vini ya no pregunta el valle.</li>
+          <li class="muted text-xs font-mono">40/40 pruebas · desplegado el 19-nov</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 BANCO COMPLETO -->
+<section class="slide" data-name="Pruebas · Banco completo" data-net="0.75" data-ai>
+  <div class="bg-aurora"></div>
+  <div class="content">
+    <div class="flex flex-wrap items-end justify-between gap-6 mb-7">
+      <div>
+        <div class="eyebrow mb-4 pop" style="color:#f5a8be">14 · Banco completo</div>
+        <h2 class="h-display text-5xl md:text-6xl"><span data-type="30 preguntas, dos cuentas.">30 preguntas, dos cuentas.</span></h2>
+      </div>
+      <div class="flex gap-4 pop">
+        <div class="glass px-5 py-3 text-center"><div class="h-display text-4xl neon"><span data-count="47">0</span><span class="text-xl">/60</span></div><div class="muted text-xs">cuenta id 2 · 21 parcelas</div></div>
+        <div class="glass px-5 py-3 text-center"><div class="h-display text-4xl neon"><span data-count="47">0</span><span class="text-xl">/60</span></div><div class="muted text-xs">cuenta id 7 · 1 parcela</div></div>
+        <div class="glass px-5 py-3 text-center"><div class="h-display text-4xl"><span data-count="20">0</span><span class="text-xl">/20</span></div><div class="muted text-xs">las 10 clave, en las dos</div></div>
+      </div>
+    </div>
+    <div class="glass p-5 pop overflow-x-auto">
+      <div id="bank" class="min-w-[760px]"></div>
+      <div class="flex flex-wrap gap-5 mt-4 text-xs font-mono muted">
+        <span><span class="score s2" style="width:14px;height:14px;vertical-align:-2px"></span> 2 correcta</span>
+        <span><span class="score s1" style="width:14px;height:14px;vertical-align:-2px"></span> 1 parcial</span>
+        <span><span class="score s0" style="width:14px;height:14px;vertical-align:-2px"></span> 0 incorrecta</span>
+        <span><span class="text-lime">★</span> pregunta clave</span>
+        <span>19-nov-2026 · una conversación por pregunta</span>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5 mt-5">
+      <div class="glass p-5 pop"><div class="eyebrow mb-2" style="color:#edbf4d">Consistencia</div><p class="text-[15px]"><b>27 de 30</b> preguntas sacaron lo mismo en las dos cuentas. Cambian la 2, la 10 y la 27.</p></div>
+      <div class="glass p-5 pop" style="border-color:rgba(214,64,114,.4)"><div class="eyebrow mb-2" style="color:#f5a8be">Lo que falla</div><p class="text-[15px]">La <b>3, 13, 18 y 24</b> salen en 0 en las dos cuentas, pero su respuesta <b>sí está</b> en los manuales: falla la búsqueda, no el contenido.</p></div>
+      <div class="glass p-5 pop"><div class="eyebrow mb-2">Velocidad</div><p class="text-[15px]">Mediana <b class="neon">2.6 s</b> y <b class="neon">2.4 s</b>. La 26 de la id 2 consultó 21 parcelas en 5.3 s.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 AGENTE AUTÓNOMO -->
+<section class="slide" data-name="Agente autónomo" data-net="0.8" data-ai>
+  <div class="bg-aurora"></div>
+  <div class="content grid lg:grid-cols-[1fr_1.4fr] gap-10 items-center">
+    <div>
+      <div class="eyebrow mb-4 pop" style="color:#f5a8be">15 · Agente autónomo</div>
+      <h2 class="h-display text-5xl mb-6"><span data-type="Propone, pero tú decides.">Propone, pero tú decides.</span></h2>
+      <div class="space-y-3">
+        <div class="glass p-4 pop"><b>Reglas autónomas</b><div class="muted text-sm">el agente revisa lecturas, clima y alertas y genera propuestas.</div></div>
+        <div class="glass p-4 pop"><b>Bandeja de decisiones</b><div class="muted text-sm">cada propuesta se aprueba, se rechaza o se deshace.</div></div>
+        <div class="glass p-4 pop"><b>Memoria del viñedo</b><div class="muted text-sm">recuerda qué parcela preocupa y cómo se resolvió antes.</div></div>
+      </div>
+    </div>
+    <div class="grid grid-cols-[1.3fr_1fr] gap-5 items-center">
+      <figure class="pop"><img class="cap-hero zoomable" src="assets/cap/crop-deshacer.png" data-full="assets/cap/deshacer.png" alt="Deshacer una decisión"><figcaption class="fig-cap">Deshacer una decisión ejecutada, con su motivo</figcaption></figure>
+      <figure class="pop"><img class="fig" style="max-height:50vh" src="assets/fig/fig18.png" alt=""><figcaption class="fig-cap">Fig. 18 · Estados de una decisión</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 16 CAPTURAS -->
+<section class="slide" data-name="El sistema" data-net="0.3">
+  <div class="bg-deep"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop">16 · El sistema</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-6"><span data-type="Así se ve CosechIA.">Así se ve CosechIA.</span></h2>
+    <div class="grid md:grid-cols-3 gap-4">
+      <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-dashboard.png" data-full="assets/cap/dashboard.png" alt="Dashboard del viticultor"><figcaption>Dashboard · KPIs, etapa vitivinícola y clima por valle</figcaption></figure>
+      <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-atlas.png" data-full="assets/cap/atlas.png" alt="Atlas del valle"><figcaption>Atlas del valle · madurez y etapas por parcela</figcaption></figure>
+      <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-registros.png" data-full="assets/cap/registros.png" alt="Registros de campo"><figcaption>Registros de campo · hoja de lecturas con semáforo</figcaption></figure>
+      <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-parcela.png" data-full="assets/cap/parcela.png" alt="Temporada de la parcela"><figcaption>Temporada de la parcela · etapas, lecturas y labores</figcaption></figure>
+      <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-vini-chat.png" data-full="assets/cap/vini-chat.png" alt="Chat de Vini"><figcaption>Vini · chat con fuentes y bandeja de decisiones</figcaption></figure>
+      <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-admin.png" data-full="assets/cap/admin.png" alt="Panel de administración"><figcaption>Administración · salud del agente y métricas</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 17 ARQUITECTURA -->
+<section class="slide" data-name="Arquitectura" data-net="0.35">
+  <div class="bg-deep"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop">17 · Arquitectura</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-6"><span data-type="Monolito moderno, IA como servicio.">Monolito moderno, IA como servicio.</span></h2>
+    <div class="flex flex-wrap gap-2 mb-8 pop">
+      <span class="chip">Laravel 13</span><span class="chip">Inertia 3</span><span class="chip">Vue 3.5</span><span class="chip">Tailwind 4</span><span class="chip">PostgreSQL</span><span class="chip">Leaflet</span><span class="chip">Chart.js</span><span class="chip">Open-Meteo</span><span class="chip" style="color:#edbf4d">LLM vía router</span><span class="chip" style="color:#edbf4d">mxbai-embed-large</span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <figure class="pop"><img class="fig" style="max-height:48vh" src="assets/fig/fig02.png" alt=""><figcaption class="fig-cap">Fig. 2 · Diagrama de bloques del producto</figcaption></figure>
+      <figure class="pop"><img class="fig" style="max-height:48vh" src="assets/fig/fig20.png" alt=""><figcaption class="fig-cap">Fig. 20 · Diagrama de despliegue</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 18 MODELO DE DATOS -->
+<section class="slide" data-name="Modelo de datos" data-net="0.35">
+  <div class="bg-deep"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop">18 · Modelo de datos</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-8"><span data-type="Del campo a la bodega, y la memoria de Vini.">Del campo a la bodega, y la memoria de Vini.</span></h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <figure class="pop"><img class="fig" style="max-height:56vh" src="assets/fig/fig21.png" alt=""><figcaption class="fig-cap">Fig. 21 · Campo, cosecha y bodega</figcaption></figure>
+      <figure class="pop"><img class="fig" style="max-height:56vh" src="assets/fig/fig22.png" alt=""><figcaption class="fig-cap">Fig. 22 · Agente Vini, conocimiento y decisiones</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 19 CIERRE -->
+<section class="slide" data-name="Cierre" data-net="0.75">
+  <div class="bg-photo" style="background-image:url(assets/img/valle-panoramica.jpg)"></div>
+  <div class="content grid lg:grid-cols-[1.3fr_1fr] gap-12 items-center">
+    <div>
+      <div class="eyebrow mb-6 pop">19 · Cierre</div>
+      <h2 class="h-display text-6xl md:text-8xl mb-8"><span data-type="Gracias.">Gracias.</span></h2>
+      <p class="text-xl text-vine-100/90 max-w-xl pop">CosechIA junta en un solo lugar el viñedo, la bodega y el conocimiento técnico, con un agente que responde con fuentes.</p>
+    </div>
+    <div class="glass p-7 pop">
+      <div class="eyebrow mb-4">Siguientes pasos</div>
+      <ul class="space-y-3">
+        <li class="flex gap-3"><span class="num-chip">01</span><span>Búsqueda: 4 preguntas con fuente que Vini no encontró (floración, Syrah, cuándo regar, deshojado).</span></li>
+        <li class="flex gap-3"><span class="num-chip">02</span><span>Riesgo por enfermedad y etapa fenológica, no un índice climático único.</span></li>
+        <li class="flex gap-3"><span class="num-chip">03</span><span>Umbrales de incidencia en campo con fuente (chanchito blanco, SENASICA).</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ====================== DATOS DE LAS PRUEBAS (conversaciones 19 y 22) ====================== */
+const QUESTIONS = [
+  {n:1, cat:'Fenología', q:'¿Cuáles son los estados fenológicos principales de la vid?', tools:['search_knowledge'], lat:2441, latBefore:2221, tin:'8.7 k', before:0, after:2,
+   exp:'Brotación, floración, cuajado y maduración · MANUALVID p. 30',
+   note:'Antes dijo «son cuatro» sin nombrarlos. Ahora los nombra y cita la p. 30.',
+   a:'Hola, soy Vini. De acuerdo con la documentación técnica, se pueden distinguir cuatro estados fenológicos principales en la vid [MANUALVID 2018, p. 30]:\n- **Brotación** [MANUALVID 2018, p. 30]\n- **Floración** [MANUALVID 2018, p. 30]\n- **Cuajado** [MANUALVID 2018, p. 30]\n- **Maduración** [MANUALVID 2018, p. 30]'},
+  {n:6, cat:'Cosecha', q:'¿Cuándo se vendimia en Baja California?', tools:['search_knowledge'], lat:2495, latBefore:2647, tin:'12.1 k', before:2, after:2,
+   exp:'Entre agosto y octubre; depende de la relación azúcares/ácidos · p. 61',
+   note:'Correcta en las dos corridas.',
+   a:'En Baja California, el periodo de vendimia se realiza generalmente entre **agosto y octubre** [Manual de determinación de cosecha], [MANUALVID 2018, p. 61].\nSin embargo, la fecha exacta depende del grado de maduración de la uva, ya que cada variedad tiene un óptimo de cosecha basado en la relación entre los azúcares y los ácidos de las bayas [Manual de determinación de cosecha], [MANUALVID 2018, p. 61].'},
+  {n:7, cat:'Cosecha', q:'¿Qué Brix, pH y acidez debe tener un Cabernet Sauvignon para cosecharse?', tools:['search_knowledge'], lat:3256, latBefore:2869, tin:'17.9 k', before:1, after:2,
+   exp:'Brix 24–26 · pH 3.3–3.7 · AT 5.5–7.0 g/L · ficha de variedad',
+   note:'Antes dio 23–26 y AT 6–8 generales. Ahora usa las fichas por valle.',
+   a:'Para la variedad Cabernet Sauvignon cultivada en los valles de Baja California (como Guadalupe, Ojos Negros, Santo Tomás, San Vicente y San Antonio de las Minas), los valores óptimos de cosecha son los siguientes:\n- **Brix**: entre **24.00 y 26.00** [Cabernet Sauvignon en Valle de Guadalupe], [Cabernet Sauvignon en Valle de Ojos Negros], [Cabernet Sauvignon en Valle de Santo Tomás], [Cabernet Sauvignon en Valle de San Vicente], [Cabernet Sauvignon en Valle de San Antonio de las Minas].\n- **pH**: entre **3.30 y 3.70** [Cabernet Sauvignon en Valle de Guadalupe], [Cabernet Sauvignon en Valle de Ojos Negros], [Cabernet Sauvignon en Valle de Santo Tomás], [Cabernet Sauvignon en Valle de San Vicente], [Cabernet Sauvignon en Valle de San Antonio de las Minas].\n- **Acidez titulable**: entre **5.50 y 7.00 g/L** [Cabernet Sauvignon en Valle de Guadalupe], [Cabernet Sauvignon en Valle de Ojos Negros], [Cabernet Sauvignon en Valle de Santo Tomás], [Cabernet Sauvignon en Valle de San Vicente], [Cabernet Sauvignon en Valle de San Antonio de las Minas].'},
+  {n:9, cat:'Cosecha', q:'¿Cuánto tiempo puede pasar entre el corte de la uva y su llegada a la bodega?', tools:['search_knowledge'], lat:2680, latBefore:2590, tin:'18.9 k', before:2, after:2,
+   exp:'2 a 3 horas; horas frescas o de noche; racimos intactos · p. 63',
+   note:'Da el límite correcto; no menciona «de noche» ni «racimos intactos».',
+   a:'De acuerdo con la documentación técnica, conviene realizar la vendimia en horas frescas y no tardar más de **2 a 3 horas** entre el corte de la uva y su entrada a la bodega [Manual de determinación de cosecha].'},
+  {n:11, cat:'Plagas', q:'¿Cómo prevengo la Botrytis?', tools:['search_knowledge'], lat:3424, latBefore:3419, tin:'26.0 k', before:2, after:2,
+   exp:'Prácticas culturales: deshojado, vegetación poco densa, sin exceso de N, descartar racimos dañados',
+   note:'Correcta; le faltan «exceso de nitrógeno» y «descartar racimos dañados».',
+   a:'Para prevenir la Botrytis (podredumbre gris), la documentación técnica destaca que la mejor estrategia son las **técnicas culturales preventivas**, ya que el combate químico es difícil [Manejo de Botrytis], [Manual de control de Botrytis].\nLas medidas preventivas recomendadas son:\n- **Manejo del dosel y aireación**:\n - Realizar el **deshojado de la zona de racimos**, lo cual mejora la aireación y reduce la incidencia de la enfermedad durante la maduración [Manejo de Botrytis], [Manual de control de Botrytis].\n - Utilizar un sistema de conducción con **vegetación poco densa** para reducir el riesgo [Manual de control de Botrytis].\n - Buscar una buena ventilación del dosel [Manejo de Botrytis].\n- **Control del vigor**: Mantener un control adecuado del vigor de la planta [Manejo de Botrytis].\n- **Higiene del viñedo**: Realizar la eliminación de restos vegetales [Manejo de Botrytis].'},
+  {n:17, cat:'Riego', q:'¿Qué es el riego deficitario controlado y cuándo no debe faltar agua?', tools:['search_knowledge'], lat:3237, latBefore:2954, tin:'29.4 k', before:1, after:2,
+   exp:'Estrés hídrico controlado que mejora la calidad; no debe faltar agua del cuajado al envero · pp. 58–59',
+   note:'Antes no daba la definición; ahora sí.',
+   a:'El **riego deficitario controlado** consiste en generar situaciones de estrés hídrico controlado que, en condiciones normales, favorecen la obtención de cosechas de calidad [Manual de riego deficitario controlado].\nRespecto a cuándo no debe faltar el agua:\n- **Del cuajado al envero**: En esta etapa no debe faltar agua, ya que un déficit hídrico reduciría considerablemente la cosecha y el área foliar [Manual de riego deficitario controlado], [MANUALVID 2018, p. 59].'},
+  {n:20, cat:'Clima', q:'¿En qué región de Winkler está el Valle de Guadalupe?', tools:['search_knowledge'], lat:3675, latBefore:3124, tin:'37.6 k', before:0, after:2,
+   exp:'Región V (2,515.58 grados-día) · MANUALVID p. 17',
+   note:'Antes: «no hay fuente». Ahora: Región V, p. 17.',
+   a:'De acuerdo con el índice de Winkler, el resultado calculado para el Valle de Guadalupe cae en el **área V** [MANUALVID 2018, p. 17].'},
+  {n:26, cat:'Datos del viñedo', q:'¿Cómo va la madurez de mis parcelas?', tools:['list_my_parcelas','get_maturity_indicators'], lat:2224, latBefore:1892, tin:'8.0 k', before:1, after:2,
+   exp:'Última lectura por parcela comparada con el óptimo de su variedad',
+   note:'Antes solo repetía Brix y pH. Ahora da Brix, pH y AT contra el óptimo de Chardonnay (conversación 78, tras el arreglo).',
+   a:'Hola. Te comparto el estado de madurez de tu parcela:\n**Parcela `prueba` (Chardonnay)**\nDe acuerdo con la última lectura del **2026-11-18**, los indicadores se encuentran así respecto al rango óptimo:\n- **Brix**: **19 °Bx** (por debajo del rango óptimo de 22 - 24)\n- **pH**: **4** (por encima del rango óptimo de 3.2 - 3.5)\n- **AT**: **4 g/L** (por debajo del rango óptimo de 6 - 7.5)\n¿Le gustaría ver también el clima o el riesgo de enfermedades para esta parcela?'},
+  {n:28, cat:'Datos del viñedo', q:'¿Hay riesgo de mildiu en mis parcelas?', tools:['list_my_parcelas','detect_disease_risk'], lat:3717, latBefore:2551, tin:'8.3 k', before:1, after:2,
+   exp:'Riesgo por parcela vs. umbral 0.70 · detect_disease_risk',
+   note:'Antes preguntaba el valle. Ahora usa el clima del Valle de Guadalupe y compara 0.829 con 0.70 (conversación 80, tras el arreglo).',
+   a:'Hola. Sí, hay riesgo de mildiu en tu parcela `prueba`.\nLa probabilidad actual es de **0.829**, lo cual supera el umbral de alerta de **0.7**. Este riesgo se debe a que en el **Valle de Guadalupe** (fuente de clima utilizada para tu parcela) se ha registrado una humedad media del **84.1%**, con **5 días de lluvia** y una temperatura máxima media de **17.7 °C** en la última semana.\nAdemás del mildiu, el sistema detectó que se han superado los umbrales de riesgo para Botrytis, Oídio, Antracnosis, Eutipiosis y Yesca.\n¿Le gustaría que revisemos las labores recomendadas para controlar estas enfermedades o prefiere ver el pronóstico del clima para los próximos días?'},
+  {n:29, cat:'Fuera de dominio', q:'¿Quién ganó el último Mundial de fútbol?', tools:[], lat:0, latBefore:0, tin:'—', before:2, after:2, guard:true,
+   exp:'Rechazo amable y redirige a viticultura · DomainGuard',
+   note:'DomainGuard la detiene sin llamar al modelo.',
+   a:'Mi especialidad es la vitivinicultura y el sistema CosechIA. No puedo ayudarle con esa solicitud, pero con gusto revisamos sus parcelas, el clima, la madurez de sus uvas o las labores pendientes. ¿Sobre qué parcela le gustaría consultar?'},
+];
+/* Banco completo del 19-nov: una calificación por pregunta (1…30) en cada cuenta. */
+const BANK = {
+  groups: [['Fenología',5],['Cosecha',5],['Plagas',5],['Riego',4],['Clima',3],['Manejo',3],['Datos',3],['Fuera',2]],
+  key: [1,6,7,9,11,17,20,26,28,29],
+  rows: [
+    ['id 2', [2,2,0,2,2, 2,2,1,2,1, 2,2,0,2,2, 2,2,0,2, 2,1,2, 2,0,1, 2,1,2, 2,2]],
+    ['id 7', [2,0,0,2,2, 2,2,1,2,2, 2,2,0,2,2, 2,2,0,2, 2,1,2, 2,0,1, 2,2,2, 2,2]],
+  ],
+  q: ['Estados fenológicos','Envero','Floración','Ciclo anual','Sensibilidad al mildiu','Cuándo se vendimia','Brix/pH/AT Cabernet','Madurez fisiológica y comercial','Del corte a la bodega','Vendimiador y cajas','Prevenir Botrytis','Qué es el mildiu','Plagas en Syrah','Enfermedades en floración','Exceso de nitrógeno','Agua al año','Riego deficitario','Cuándo regar','Análisis foliar','Región de Winkler','Clima de Guadalupe','Altitud','Poda de invierno','Deshojado','Plantas por hectárea','Madurez de mis parcelas','Clima de la semana','Riesgo de mildiu','Mundial de fútbol','Programa en Python'],
+};
+function drawBank(){
+  const el = $('#bank'); if (!el || el.dataset.done) return; el.dataset.done = 1;
+  const groupCells = (fn) => { let n = 0; return BANK.groups.map(([name, size]) => { const cells = Array.from({length:size}, (_, i) => fn(n + i)).join(''); n += size; return `<div style="flex:${size};display:grid;grid-template-columns:repeat(${size},1fr);gap:4px">${cells}</div>`; }).join(''); };
+  const head = `<div class="flex items-end gap-3 mb-2"><div class="w-12 shrink-0"></div><div class="flex-1 flex gap-3">${BANK.groups.map(([name, size]) => `<div style="flex:${size}" class="text-[11px] font-mono muted border-b border-white/10 pb-1">${name}</div>`).join('')}</div></div>`;
+  const nums = `<div class="flex items-center gap-3 mb-1"><div class="w-12 shrink-0"></div><div class="flex-1 flex gap-3">${groupCells(i => `<div class="text-center text-[10px] font-mono ${BANK.key.includes(i+1) ? 'text-lime' : 'muted'}">${BANK.key.includes(i+1) ? '★' : ''}${i+1}</div>`)}</div></div>`;
+  const rows = BANK.rows.map(([label, scores]) => `<div class="flex items-center gap-3 mb-1.5"><div class="w-12 shrink-0 text-xs font-mono muted">${label}</div><div class="flex-1 flex gap-3">${groupCells(i => `<div class="bank-cell score s${scores[i]}" title="P${i+1} · ${BANK.q[i]} · ${scores[i]}" style="width:100%;height:34px;font-size:12px">${scores[i]}</div>`)}</div></div>`).join('');
+  el.innerHTML = head + nums + rows;
+  if (!reduced) gsap.fromTo($$('.bank-cell', el), {opacity:0, scale:.4}, {opacity:1, scale:1, duration:.35, stagger:{each:.012, from:'start'}, delay:.3, ease:'back.out(2)'});
+}
+const CATS = [
+  {name:'Fenología', b:0, a:2, max:2}, {name:'Cosecha', b:5, a:6, max:6}, {name:'Plagas', b:2, a:2, max:2},
+  {name:'Riego', b:1, a:2, max:2}, {name:'Clima', b:0, a:2, max:2}, {name:'Datos del viñedo', b:2, a:4, max:4}, {name:'Fuera de dominio', b:2, a:2, max:2},
+];
+
+/* ====================== UTILIDADES ====================== */
+gsap.registerPlugin(ScrollTrigger);
+const EASE = 'expo.out';
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+function renderAnswer(text){
+  const lines = text.split('\n');
+  let html = '', inList = false;
+  const inline = s => {
+    s = esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/`(.+?)`/g,'<code class="font-mono text-[12px] text-vine-200">$1</code>');
+    s = s.replace(/\[([^\]]+)\]/g,'<span class="cite">$1</span>');
+    // Agrupa citas seguidas: muestra la primera y «+N».
+    s = s.replace(/(<span class="cite">[^<]+<\/span>)((?:,\s*<span class="cite">[^<]+<\/span>)+)/g, (m, first, rest) => {
+      const n = (rest.match(/class="cite"/g) || []).length;
+      return n >= 2 ? `${first}<span class="cite">+${n}</span>` : m;
+    });
+    return s;
+  };
+  for (const raw of lines){
+    const sub = /^ - /.test(raw), item = /^- /.test(raw);
+    if (item || sub){
+      if (!inList){ html += '<ul>'; inList = true; }
+      html += `<li class="${sub ? 'sub' : ''}">${inline(raw.replace(/^ ?- /,''))}</li>`;
+    } else {
+      if (inList){ html += '</ul>'; inList = false; }
+      if (raw.trim()) html += `<p class="mt-1">${inline(raw)}</p>`;
+    }
+  }
+  if (inList) html += '</ul>';
+  return html;
+}
+
+/* ====================== RED DE NODOS ====================== */
+(function net(){
+  const c = $('#net'), ctx = c.getContext('2d');
+  let w, h, pts = [], dpr = Math.min(devicePixelRatio || 1, 2);
+  const resize = () => {
+    w = c.width = innerWidth * dpr; h = c.height = innerHeight * dpr;
+    c.style.width = innerWidth + 'px'; c.style.height = innerHeight + 'px';
+    const n = Math.round(Math.min(90, innerWidth / 18));
+    pts = Array.from({length:n}, () => ({x:Math.random()*w, y:Math.random()*h, vx:(Math.random()-.5)*.25*dpr, vy:(Math.random()-.5)*.25*dpr}));
+  };
+  resize(); addEventListener('resize', resize);
+  const link = 150 * dpr;
+  (function frame(){
+    ctx.clearRect(0,0,w,h);
+    for (const p of pts){ p.x += p.vx; p.y += p.vy; if (p.x<0||p.x>w) p.vx*=-1; if (p.y<0||p.y>h) p.vy*=-1; }
+    for (let i=0;i<pts.length;i++){
+      for (let j=i+1;j<pts.length;j++){
+        const a=pts[i], b=pts[j], d=Math.hypot(a.x-b.x,a.y-b.y);
+        if (d<link){ ctx.strokeStyle=`rgba(128,177,72,${(1-d/link)*.55})`; ctx.lineWidth=dpr*.8; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); }
+      }
+      const p=pts[i]; ctx.fillStyle='rgba(228,240,79,.85)'; ctx.shadowColor='#e4f04f'; ctx.shadowBlur=8*dpr; ctx.beginPath(); ctx.arc(p.x,p.y,1.6*dpr,0,7); ctx.fill(); ctx.shadowBlur=0;
+    }
+    if (!reduced) requestAnimationFrame(frame);
+  })();
+})();
+
+/* ====================== NAVEGACIÓN ====================== */
+const slides = $$('.slide');
+let current = 0;
+const pad = n => String(n).padStart(2,'0');
+function setCurrent(i){
+  current = i;
+  const s = slides[i];
+  $('#sec-name').textContent = s.dataset.name;
+  $('#counter').innerHTML = `<b>${pad(i+1)}</b> / ${slides.length}`;
+  $('#progress').style.width = `${((i+1)/slides.length)*100}%`;
+  $('#net').style.opacity = s.dataset.net || .3;
+}
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) setCurrent(slides.indexOf(e.target)); });
+}, {threshold:.55});
+slides.forEach(s => io.observe(s));
+const go = i => slides[Math.max(0, Math.min(slides.length-1, i))].scrollIntoView({behavior: reduced ? 'auto' : 'smooth'});
+addEventListener('keydown', e => {
+  if ($('#lightbox').classList.contains('open')){ if (e.key === 'Escape') $('#lightbox').classList.remove('open'); return; }
+  const onLive = slides[current].id === 'live';
+  if (onLive && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); playNext(); return; }
+  if (['ArrowDown','PageDown','ArrowRight',' '].includes(e.key)){ e.preventDefault(); go(current+1); }
+  if (['ArrowUp','PageUp','ArrowLeft'].includes(e.key)){ e.preventDefault(); go(current-1); }
+  if (e.key === 'Home'){ e.preventDefault(); go(0); }
+  if (e.key === 'End'){ e.preventDefault(); go(slides.length-1); }
+});
+
+/* #12 en la URL abre directamente esa diapositiva. */
+addEventListener('load', () => { const n = parseInt(location.hash.slice(1), 10); if (n) slides[Math.min(slides.length, n) - 1].scrollIntoView(); });
+
+/* Lightbox */
+$$('.fig, .zoomable').forEach(img => img.addEventListener('click', () => { $('#lightbox img').src = img.dataset.full || img.src; $('#lightbox').classList.add('open'); }));
+$('#lightbox').addEventListener('click', () => $('#lightbox').classList.remove('open'));
+
+/* ====================== ANIMACIONES DE ENTRADA ====================== */
+function typeText(el, text, speed=45){
+  el.textContent = ''; el.classList.add('type-caret');
+  let i = 0;
+  return new Promise(res => {
+    const t = setInterval(() => {
+      el.textContent = text.slice(0, ++i);
+      if (i >= text.length){ clearInterval(t); setTimeout(() => el.classList.remove('type-caret'), 600); res(); }
+    }, speed);
+  });
+}
+function countUp(el){
+  const target = +el.dataset.count, obj = {v:0};
+  gsap.to(obj, {v:target, duration:1.4, ease:'power3.out', onUpdate:() => el.textContent = Math.round(obj.v)});
+}
+slides.forEach(slide => {
+  const content = $('.content', slide);
+  const pops = $$('.pop', slide);
+  const typed = $$('[data-type]', slide);
+  typed.forEach(el => el.style.visibility = 'hidden');
+  ScrollTrigger.create({
+    trigger: slide, start:'top 60%', once:true,
+    onEnter: () => {
+      if (reduced){ gsap.set(pops,{opacity:1}); typed.forEach(el => el.style.visibility=''); if (slide.querySelector('#bank')) drawBank(); return; }
+      // Zoom de cámara con desenfoque.
+      gsap.fromTo(content, {scale:1.06, filter:'blur(10px)'}, {scale:1, filter:'blur(0px)', duration:1.1, ease:EASE, clearProps:'filter,transform'});
+      typed.forEach(el => { el.style.visibility=''; const txt = el.dataset.type; typeText(el, txt, Math.max(18, Math.min(55, 1400/txt.length))); });
+      // Pop con rebote, escalonado.
+      if (pops.length) gsap.fromTo(pops, {opacity:0, scale:.6, y:16}, {opacity:1, scale:1, y:0, duration:.55, stagger:.08, delay:.25, ease:'back.out(2.2)',
+        onComplete(){ $$('.float', slide).forEach((f,k) => gsap.to(f, {y:-8, duration:2.4+k*.3, yoyo:true, repeat:-1, ease:'sine.inOut'})); }});
+      $$('[data-count]', slide).forEach(el => setTimeout(() => countUp(el), 500));
+      $$('.connector', slide).forEach(cn => gsap.fromTo(cn, {scaleX:0}, {scaleX:1, duration:1.6, ease:'power2.inOut', delay:.3}));
+      if (slide.querySelector('#donut')) drawCharts();
+      if (slide.querySelector('#bank')) drawBank();
+      if (slide.id === 'live') setTimeout(() => { if (playIndex === -1) playNext(); }, 900);
+    }
+  });
+});
+
+/* ====================== GRÁFICAS ====================== */
+function drawCharts(){
+  // Dona de calificaciones.
+  const donut = $('#donut'), data = [[10,'#80b148'],[0,'#e9a724'],[0,'#d64072']], total = 10, r = 78, C = 2*Math.PI*r;
+  let off = 0, svg = `<circle cx="100" cy="100" r="${r}" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="22"/>`;
+  data.forEach(([v,col]) => { if (!v) return; const len = C*v/total; svg += `<circle class="arc" cx="100" cy="100" r="${r}" fill="none" stroke="${col}" stroke-width="22" stroke-dasharray="0 ${C}" data-len="${len}" data-off="${-off}" transform="rotate(-90 100 100)" style="filter:drop-shadow(0 0 6px ${col})"/>`; off += len; });
+  svg += `<text x="100" y="96" text-anchor="middle" fill="#e8f0e2" font-family="Fraunces" font-size="44" font-weight="600">20</text><text x="100" y="122" text-anchor="middle" fill="#a9b8a0" font-family="JetBrains Mono" font-size="12">de 20 pts</text>`;
+  donut.innerHTML = svg;
+  $$('.arc', donut).forEach((a,i) => gsap.to(a, {attr:{'stroke-dasharray':`${a.dataset.len} ${C}`, 'stroke-dashoffset':a.dataset.off}, duration:1.2, delay:.4+i*.3, ease:'power3.out'}));
+
+  // Barras de latencia (sin la 29, que no llama al modelo).
+  const L = QUESTIONS.filter(q => !q.guard), lat = $('#lat'), W=520, H=250, padL=30, padB=26, max=4;
+  const gw = (W-padL)/L.length, bw = gw*.32;
+  let g = '';
+  for (let s=0; s<=4; s++){ const y = H-padB-(H-padB-10)*s/max; g += `<line x1="${padL}" x2="${W}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,.06)"/><text x="${padL-6}" y="${y+4}" text-anchor="end" fill="#7c87a5" font-size="10" font-family="JetBrains Mono">${s}</text>`; }
+  L.forEach((q,i) => {
+    const x = padL + i*gw + gw*.15;
+    const hb = (H-padB-10)*q.latBefore/1000/max, ha = (H-padB-10)*q.lat/1000/max;
+    g += `<rect class="bar" x="${x}" y="${H-padB}" width="${bw}" height="0" rx="3" fill="#5c6788" data-h="${hb}"/>`;
+    g += `<rect class="bar" x="${x+bw+3}" y="${H-padB}" width="${bw}" height="0" rx="3" fill="#80b148" data-h="${ha}" style="filter:drop-shadow(0 0 4px rgba(128,177,72,.6))"/>`;
+    g += `<text x="${x+bw}" y="${H-8}" text-anchor="middle" fill="#a9b8a0" font-size="10" font-family="JetBrains Mono">P${q.n}</text>`;
+  });
+  const med = H-padB-(H-padB-10)*3.237/max;
+  g += `<line x1="${padL}" x2="${W}" y1="${med}" y2="${med}" stroke="#e4f04f" stroke-dasharray="4 4" opacity=".7"/><text x="${W-2}" y="${med-5}" text-anchor="end" fill="#e4f04f" font-size="10" font-family="JetBrains Mono">mediana 3.2 s</text>`;
+  lat.innerHTML = g;
+  $$('.bar', lat).forEach((b,i) => gsap.to(b, {attr:{height:b.dataset.h, y:H-padB-b.dataset.h}, duration:.9, delay:.3+i*.05, ease:'back.out(1.4)'}));
+
+  // Aciertos por categoría.
+  $('#cats').innerHTML = CATS.map(c => `
+    <div><div class="flex justify-between text-sm mb-1"><span>${c.name}</span><span class="font-mono text-xs"><span class="text-ink-400">${c.b}</span> → <b class="text-vine-200">${c.a}</b>/${c.max}</span></div>
+    <div class="relative h-2 rounded-full bg-white/5 overflow-hidden"><div class="cb absolute inset-y-0 left-0 bg-ink-500 rounded-full" style="width:0" data-w="${c.b/c.max*100}"></div><div class="ca absolute inset-y-0 left-0 rounded-full" style="width:0;background:linear-gradient(90deg,#4d8238,#80b148);box-shadow:0 0 8px #80b148;opacity:.9" data-w="${c.a/c.max*100}"></div></div></div>`).join('');
+  $$('#cats .cb').forEach((b,i) => gsap.to(b, {width:b.dataset.w+'%', duration:.8, delay:.3+i*.06, ease:EASE}));
+  $$('#cats .ca').forEach((b,i) => gsap.to(b, {width:b.dataset.w+'%', duration:1, delay:1.1+i*.08, ease:EASE}));
+}
+
+/* ====================== CHAT SIMULADO ====================== */
+let playIndex = -1, busy = false;
+const body = $('#chat-body'), ph = $('#chat-ph'), headOrb = $('#head-orb'), cursor = $('#cursor');
+/* Hora real de cada turno en la conversación 22. */
+const TIMES = {1:'21:10', 6:'21:13', 7:'21:13', 9:'21:14', 11:'21:15', 17:'21:15', 20:'21:15', 26:'00:52', 28:'00:53', 29:'21:18'};
+const now = () => TIMES[QUESTIONS[playIndex].n];
+const dotsEl = $('#qdots');
+QUESTIONS.forEach((q,i) => { const d = document.createElement('div'); d.className = 'qdot'; d.textContent = q.n; d.title = q.q; d.onclick = () => { if (!busy){ playIndex = i-1; body.innerHTML=''; playNext(); } }; dotsEl.appendChild(d); });
+const orbHTML = (s, thinking) => `<div class="orb ${thinking?'thinking':''}" style="--s:${s}px"><span class="pulse"><span class="sphere"><span class="colors"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span></span><span class="gl"></span></span></span><span class="orbit"><span class="sat"><span class="spark"></span></span><span class="sat" style="transform:rotate(120deg)"><span class="spark" style="animation-delay:-.25s"></span></span><span class="sat" style="transform:rotate(240deg)"><span class="spark" style="animation-delay:-.5s"></span></span></span></div>`;
+const scrollDown = () => gsap.to(body, {scrollTop: body.scrollHeight, duration:.5, ease:'power2.out'});
+
+function setEval(q, revealed){
+  $('#ev-cat').textContent = `P${q.n} · ${q.cat}`;
+  $('#ev-exp').textContent = q.exp;
+  $('#ev-tool').textContent = q.guard ? 'DomainGuard (sin LLM)' : q.tools.join(' + ');
+  $('#ev-pending').innerHTML = q.pending ? '<span class="pending-tag">Se actualiza tras el arreglo</span>' : '';
+  const b = $('#ev-before'), a = $('#ev-after');
+  b.className = `score s${q.before}`; b.textContent = q.before;
+  a.className = 'score'; a.textContent = '·';
+  $('#ev-note').textContent = '…';
+  if (revealed){ a.className = `score s${q.after}`; a.textContent = q.after; $('#ev-note').textContent = q.note; }
+}
+
+async function moveCursorToSend(){
+  if (reduced) return;
+  const r = $('#send-btn').getBoundingClientRect();
+  const tx = r.left + r.width/2 - 4, ty = r.top + r.height/2 - 2;
+  const sx = tx - 220, sy = ty - 160;
+  gsap.set(cursor, {x:sx, y:sy, opacity:0, scale:1});
+  // Curva Bézier hacia el botón de enviar.
+  const p = {t:0}, cx = sx + 40, cy = ty + 40;
+  await new Promise(res => {
+    gsap.to(cursor, {opacity:1, duration:.2});
+    gsap.to(p, {t:1, duration:.75, ease:'power2.inOut', onUpdate(){
+      const t = p.t, x = (1-t)*(1-t)*sx + 2*(1-t)*t*cx + t*t*tx, y = (1-t)*(1-t)*sy + 2*(1-t)*t*cy + t*t*ty;
+      gsap.set(cursor, {x, y});
+    }, onComplete: res});
+  });
+  gsap.to(cursor, {scale:.85, duration:.08, yoyo:true, repeat:1});
+  const rip = document.createElement('span'); rip.className = 'ripple'; $('#send-btn').appendChild(rip);
+  gsap.fromTo(rip, {scale:1, opacity:1}, {scale:2.4, opacity:0, duration:.6, ease:'power2.out', onComplete:() => rip.remove()});
+  await sleep(180);
+  gsap.to(cursor, {opacity:0, duration:.4, delay:.2});
+}
+
+async function playNext(){
+  if (busy) return;
+  if (playIndex >= QUESTIONS.length - 1) return;
+  busy = true;
+  playIndex++;
+  const q = QUESTIONS[playIndex];
+  $$('.qdot').forEach((d,i) => d.classList.toggle('active', i === playIndex));
+  setEval(q, false);
+  $('#ev-timer').textContent = '0.0 s';
+
+  // 1. La pregunta se escribe sola en la caja.
+  ph.classList.remove('empty');
+  await typeText(ph, q.q, reduced ? 1 : 28);
+  ph.classList.remove('type-caret');
+  await moveCursorToSend();
+  ph.textContent = 'Pregúntale a Vini…'; ph.classList.add('empty');
+
+  // 2. Globo del usuario con pop.
+  const u = document.createElement('div'); u.className = 'msg user';
+  u.innerHTML = `<div><div class="bubble">${esc(q.q)}</div><span class="msg-time text-right">${now()}</span></div>`;
+  body.appendChild(u); gsap.fromTo(u, {scale:0, opacity:0, transformOrigin:'100% 100%'}, {scale:1, opacity:1, duration:.35, ease:'back.out(2.4)'}); scrollDown();
+  await sleep(250);
+
+  // 3. Vini piensa: orbe con halo, chips de tools y cronómetro.
+  const ag = document.createElement('div'); ag.className = 'msg agent';
+  ag.innerHTML = `${orbHTML(30, true)}<div class="min-w-0 flex-1"><div class="tools flex flex-wrap gap-1.5"></div><div class="ans"></div></div>`;
+  body.appendChild(ag); gsap.fromTo(ag, {opacity:0, y:10}, {opacity:1, y:0, duration:.3}); scrollDown();
+  headOrb.classList.add('thinking'); $('#head-status').textContent = q.guard ? 'Revisando el tema…' : 'Pensando…';
+
+  const realMs = q.guard ? 350 : q.lat;
+  const t0 = performance.now();
+  const timer = setInterval(() => { const el = Math.min(performance.now()-t0, realMs); $('#ev-timer').textContent = (el/1000).toFixed(1) + ' s'; }, 50);
+  const toolsEl = $('.tools', ag);
+  if (q.tools.length){
+    await sleep(Math.min(500, realMs*.2));
+    q.tools.forEach(t => { const c = document.createElement('span'); c.className = 'tool-chip'; c.innerHTML = `<span class="spin"></span>${t}`; toolsEl.appendChild(c); gsap.fromTo(c, {scale:0}, {scale:1, duration:.35, ease:'back.out(2.5)'}); });
+    scrollDown();
+  }
+  await sleep(Math.max(0, realMs - (performance.now()-t0)));
+  clearInterval(timer);
+  $('#ev-timer').textContent = q.guard ? '< 0.1 s' : (q.lat/1000).toFixed(1) + ' s';
+  $$('.tool-chip', toolsEl).forEach(c => c.classList.add('done'));
+  ag.querySelector('.orb').classList.remove('thinking');
+  headOrb.classList.remove('thinking'); $('#head-status').textContent = 'En línea';
+
+  // 4. Respuesta: globo con pop y párrafos escalonados.
+  const ans = $('.ans', ag);
+  ans.innerHTML = `<div class="bubble mt-1.5">${renderAnswer(q.a)}</div><span class="msg-time">${now()}${q.tin !== '—' ? ' · ' + q.tin + ' tokens de entrada' : ''}</span>`;
+  const bub = $('.bubble', ans);
+  gsap.fromTo(bub, {scale:0, opacity:0, transformOrigin:'0% 0%'}, {scale:1, opacity:1, duration:.35, ease:'back.out(2)'});
+  gsap.fromTo($$('p, li', bub), {opacity:0, y:6}, {opacity:1, y:0, duration:.35, stagger:.12, delay:.15});
+  scrollDown(); setTimeout(scrollDown, 800);
+
+  await sleep(600);
+  setEval(q, true);
+  gsap.fromTo('#ev-after', {scale:0}, {scale:1, duration:.4, ease:'back.out(3)'});
+  const dot = $$('.qdot')[playIndex]; dot.classList.add(`s${q.after}`);
+  busy = false;
+}
+$('#btn-play').onclick = playNext;
+$('#btn-reset').onclick = () => { if (busy) return; playIndex = -1; body.innerHTML = ''; $$('.qdot').forEach(d => d.className = 'qdot'); playNext(); };
+</script>
+</body>
+</html>
