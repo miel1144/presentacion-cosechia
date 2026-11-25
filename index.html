@@ -776,13 +776,36 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
   </div>
 </section>
 
+<!-- 22 PRUEBAS MANUALES · AGENTES 0 A 3 -->
+<section class="slide" data-name="Pruebas manuales" data-net="0.6" data-ai>
+  <div class="bg-aurora"></div>
+  <div class="content">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+      <div>
+        <div class="eyebrow mb-3 pop" style="color:#f5a8be">22 · Pruebas manuales · agentes 0 a 3 · 23 al 25 de noviembre</div>
+        <h2 class="h-display text-4xl md:text-5xl"><span data-type="64 pruebas con el chat real, y lo que afinamos.">64 pruebas con el chat real, y lo que afinamos.</span></h2>
+      </div>
+      <div class="flex flex-wrap gap-2 pop">
+        <span class="chip"><b class="text-white">52</b>&nbsp;completas</span><span class="chip"><b class="text-white">10</b>&nbsp;con observación</span><span class="chip"><b class="text-white">1</b>&nbsp;incorrecta</span><span class="chip"><b class="text-white">1</b>&nbsp;aplazada</span>
+      </div>
+    </div>
+    <div class="space-y-3">
+      <div class="fb pop"><div class="fb-q">«Cosecharemos mañana 800 kg»: el sistema lo rechazaba y Vini proponía la cosecha con la fecha de hoy.</div><div class="fb-arrow">→</div><div class="fb-a"><b>Una fecha futura no se cambia.</b> <span class="muted">Vini dice que no se registran fechas futuras y pide la fecha real, o te ofrece un recordatorio.</span></div></div>
+      <div class="fb pop"><div class="fb-q">«El envero empezó el 2026-12-30» recibía el mensaje de «fuera de ámbito».</div><div class="fb-arrow">→</div><div class="fb-a"><b>Un dato inválido sigue siendo del viñedo.</b> <span class="muted">Vini explica qué dato falla en lugar de decir que no es su tema.</span></div></div>
+      <div class="fb pop"><div class="fb-q">Con la temporada cerrada, riego y bitácora mostraban la tarjeta y rechazaban hasta el Sí.</div><div class="fb-arrow">→</div><div class="fb-a"><b>Se revisa antes de la tarjeta.</b> <span class="muted">La herramienta prueba la escritura sin guardar, igual que la cosecha; Vini revisa la temporada antes de pedirte datos.</span></div></div>
+      <div class="fb pop"><div class="fb-q">Dos tanques FerAlc-T-01 en bodegas distintas: Vini preguntaba cuál y no salía del ciclo.</div><div class="fb-arrow">→</div><div class="fb-a"><b>Usa el tanque de la bodega del vino.</b> <span class="muted">Si nombras la bodega, ella desempata.</span></div></div>
+    </div>
+    <div class="flex flex-wrap gap-2 mt-6 pop"><span class="chip" style="color:#edbf4d">Por repetir: proponer el envero cuando el Brix sube</span><span class="chip">preguntar por etapas atrasadas</span><span class="chip">código de la primera parcela de un viñedo</span></div>
+  </div>
+</section>
+
 <!-- 23 PRUEBA EN VIVO · GUION -->
 <section class="slide" data-name="Prueba en vivo · Guion" data-net="0.5" data-ai>
   <div class="bg-aurora"></div>
   <div class="content">
     <div class="flex flex-wrap items-end justify-between gap-4 mb-5">
       <div>
-        <div class="eyebrow mb-3 pop" style="color:#f5a8be">22 · Prueba en vivo</div>
+        <div class="eyebrow mb-3 pop" style="color:#f5a8be">23 · Prueba en vivo</div>
         <h2 class="h-display text-4xl md:text-5xl"><span data-type="Del viñedo a la botella, solo con el chat.">Del viñedo a la botella, solo con el chat.</span></h2>
       </div>
       <div class="flex flex-wrap gap-2 pop">
@@ -794,7 +817,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
       <span><span class="lk map">mapa</span> marca o dibuja en el mapa del chat y pulsa «Usar…»</span>
       <span><span class="lk todas">sí a todas</span> escríbelo para confirmar varias tarjetas</span>
       <span>Los códigos (LotUva-…, LotVin-…, FerAlc-T-…) los asigna el sistema: usa los que devuelva Vini.</span>
-      <span style="color:#f3d98c">Usa una cuenta con una sola bodega: con dos tanques FerAlc-T-01 en bodegas distintas, Vini no los distingue.</span>
+      <span>Con el mismo código de tanque en dos bodegas, Vini usa el de la bodega donde está el vino, o la que le nombres.</span>
     </div>
   </div>
 </section>
@@ -817,7 +840,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
       </div>
     </div>
     <div>
-      <div class="eyebrow mb-3 pop" style="color:#f5a8be">23 · Respaldo de la prueba en vivo</div>
+      <div class="eyebrow mb-3 pop" style="color:#f5a8be">24 · Respaldo de la prueba en vivo</div>
       <h2 class="h-display text-4xl mb-5"><span data-type="La misma corrida, repetida.">La misma corrida, repetida.</span></h2>
       <div class="space-y-3" id="phase-rail"></div>
       <figure class="mt-5 pop" id="ficha-fig" style="opacity:.25;transition:opacity .6s var(--ease)"><img class="cap-hero zoomable" style="max-height:30vh;object-fit:cover;object-position:top" src="assets/cap/crop-ficha.png" data-full="assets/cap/ficha.png" alt="Ficha de trazabilidad"><figcaption class="fig-cap">Ficha de trazabilidad: 6,000 botellas de 100 % Nebbiolo 2026</figcaption></figure>
@@ -829,7 +852,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
 <section class="slide" data-name="El sistema" data-net="0.3">
   <div class="bg-deep"></div>
   <div class="content">
-    <div class="eyebrow mb-4 pop">24 · El sistema</div>
+    <div class="eyebrow mb-4 pop">25 · El sistema</div>
     <h2 class="h-display text-5xl md:text-6xl mb-6"><span data-type="Así se ve CosechIA.">Así se ve CosechIA.</span></h2>
     <div class="grid md:grid-cols-3 gap-4">
       <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-dashboard.png" data-full="assets/cap/dashboard.png" alt="Dashboard del viticultor"><figcaption>Dashboard · KPIs, etapa vitivinícola y clima por valle</figcaption></figure>
@@ -846,7 +869,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
 <section class="slide" data-name="Arquitectura" data-net="0.35">
   <div class="bg-deep"></div>
   <div class="content">
-    <div class="eyebrow mb-4 pop">25 · Arquitectura</div>
+    <div class="eyebrow mb-4 pop">26 · Arquitectura</div>
     <h2 class="h-display text-5xl md:text-6xl mb-6"><span data-type="Monolito moderno, IA como servicio.">Monolito moderno, IA como servicio.</span></h2>
     <div class="flex flex-wrap gap-2 mb-8 pop">
       <span class="chip">Laravel 13</span><span class="chip">Inertia 3</span><span class="chip">Vue 3.5</span><span class="chip">Tailwind 4</span><span class="chip">PostgreSQL</span><span class="chip">Leaflet</span><span class="chip">Chart.js</span><span class="chip">Open-Meteo</span><span class="chip" style="color:#edbf4d">LLM vía router</span><span class="chip" style="color:#edbf4d">mxbai-embed-large</span>
@@ -862,7 +885,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
 <section class="slide" data-name="Modelo de datos" data-net="0.35">
   <div class="bg-deep"></div>
   <div class="content">
-    <div class="eyebrow mb-4 pop">26 · Modelo de datos</div>
+    <div class="eyebrow mb-4 pop">27 · Modelo de datos</div>
     <h2 class="h-display text-5xl md:text-6xl mb-8"><span data-type="Del campo a la bodega, y la memoria de Vini.">Del campo a la bodega, y la memoria de Vini.</span></h2>
     <div class="grid md:grid-cols-2 gap-6">
       <figure class="pop"><img class="fig" style="max-height:56vh" src="assets/fig/fig21.png" alt=""><figcaption class="fig-cap">Fig. 21 · Campo, cosecha y bodega</figcaption></figure>
@@ -876,7 +899,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
   <div class="bg-photo" style="background-image:url(assets/img/valle-panoramica.jpg)"></div>
   <div class="content grid lg:grid-cols-[1.3fr_1fr] gap-12 items-center">
     <div>
-      <div class="eyebrow mb-6 pop">27 · Cierre</div>
+      <div class="eyebrow mb-6 pop">28 · Cierre</div>
       <h2 class="h-display text-6xl md:text-8xl mb-8"><span data-type="Gracias.">Gracias.</span></h2>
       <p class="text-xl text-vine-100/90 max-w-xl pop">CosechIA junta en un solo lugar el viñedo, la bodega y el conocimiento técnico, con un agente que responde con fuentes y registra por ti, siempre con tu Sí.</p>
     </div>
@@ -888,6 +911,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
         <li class="flex gap-3"><span class="num-chip">03</span><span>Umbrales de incidencia en campo con fuente (chanchito blanco, SENASICA).</span></li>
         <li class="flex gap-3"><span class="num-chip">04</span><span>Que Vini hable: respuestas por voz.</span></li>
         <li class="flex gap-3"><span class="num-chip">05</span><span>Habilitar más proveedores BYOK (OpenAI, Gemini) cuando pasen su prueba con key real.</span></li>
+        <li class="flex gap-3"><span class="num-chip">06</span><span>Pruebas manuales de los agentes 4 a 8 (bodega, consultas, recordatorios y reportes).</span></li>
       </ul>
     </div>
   </div>
