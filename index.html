@@ -174,6 +174,34 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
 .rw.r{background:rgba(124,135,165,.16);color:#d3d8e3;border:1px solid rgba(124,135,165,.35)}
 .rw.w{background:rgba(233,167,36,.14);color:#f3d98c;border:1px solid rgba(233,167,36,.4)}
 .new-tag{display:inline-block;margin-left:6px;font-size:9.5px;padding:1px 6px;border-radius:5px;background:rgba(128,177,72,.2);color:#cfe8a6;border:1px solid rgba(128,177,72,.45);vertical-align:1px}
+/* Prueba en vivo */
+.phase{border-radius:18px;padding:14px 14px 10px}
+.phase h3{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--primary);margin:0 0 8px}
+.lstep{display:grid;grid-template-columns:26px 1fr;gap:10px;width:100%;text-align:left;padding:7px 8px;border-radius:10px;border:1px solid transparent;background:none;color:inherit;cursor:copy;transition:background .2s,border-color .2s}
+.lstep:hover{background:rgba(128,177,72,.08);border-color:rgba(128,177,72,.3)}
+.lstep .n{font-family:var(--font-mono);font-size:11px;color:var(--lime);border:1px solid rgba(228,240,79,.35);border-radius:7px;height:22px;display:grid;place-items:center}
+.lstep .q{font-size:12.5px;line-height:1.38;color:#e6ece1}
+.lstep .m{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;font-family:var(--font-mono);font-size:10px;color:#edbf4d}
+.lstep.copied{border-color:var(--primary);background:rgba(128,177,72,.16)}
+.lk{display:inline-block;font-family:var(--font-mono);font-size:10px;padding:1px 6px;border-radius:5px;border:1px solid rgba(255,255,255,.15);color:#d3d8e3}
+.lk.map{border-color:rgba(86,160,220,.5);color:#a9d4f5;background:rgba(86,160,220,.12)}
+.lk.si{border-color:rgba(128,177,72,.5);color:#cfe8a6;background:rgba(128,177,72,.14)}
+.lk.todas{border-color:rgba(228,240,79,.5);color:var(--lime);background:rgba(228,240,79,.1)}
+.lk.read{border-color:rgba(124,135,165,.45);color:#d3d8e3;background:rgba(124,135,165,.14)}
+.vcard{margin-top:8px;border-radius:14px;padding:10px 13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);font-size:12.5px}
+.vcard .t{font-weight:600;margin-bottom:4px}
+.vcard .d{color:var(--muted);line-height:1.45}
+.vcard .btns{display:flex;gap:6px;margin-top:8px;align-items:center}
+.vbtn{font-size:12px;padding:3px 10px;border-radius:7px;border:1px solid rgba(255,255,255,.14);color:#e6ece1}
+.vbtn.si{background:#80b148;color:#0f1f0c;border-color:#80b148;font-weight:600}
+.vbtn.ok{background:rgba(128,177,72,.18);color:#cfe8a6;border-color:rgba(128,177,72,.4)}
+.mapbox{margin-top:8px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1);max-width:320px}
+.mapbox img{display:block;width:100%}
+.prail{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;border:1px solid var(--glass-border);background:var(--glass);transition:all .4s var(--ease)}
+.prail .dots{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.prail .dot{width:18px;height:6px;border-radius:3px;background:rgba(255,255,255,.1);transition:background .3s}
+.prail .dot.on{background:var(--primary);box-shadow:0 0 6px var(--primary)}
+.prail.cur{border-color:rgba(128,177,72,.6);box-shadow:0 0 0 3px rgba(128,177,72,.15)}
 /* Memoria */
 .mem-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:14.5px;line-height:1.45}
 .mem-list li{position:relative;padding-left:22px;color:#d9e2d2}
@@ -194,7 +222,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
 <canvas id="net"></canvas>
 <svg id="cursor" viewBox="0 0 24 24"><path d="M4 2l15 10-6.5 1.5L16 21l-3 1.5-3.5-7.5L4 19z" fill="#fff" stroke="#0f1f0c" stroke-width="1.4" stroke-linejoin="round"/></svg>
 <div id="lightbox"><img alt=""></div>
-<div id="footer"><div class="brand"><img src="assets/img/cia-blanco.png" alt=""><span id="sec-name">Portada</span></div><div id="counter"><b>01</b> / 26</div></div>
+<div id="footer"><div class="brand"><img src="assets/img/cia-blanco.png" alt=""><span id="sec-name">Portada</span></div><div id="counter"><b>01</b> / 28</div></div>
 
 <!-- 01 PORTADA -->
 <section class="slide" data-name="Portada" data-net="0.75">
@@ -628,7 +656,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
         <div class="glass p-4 flex gap-4 items-center pop" style="border-color:rgba(128,177,72,.5)"><span class="num-chip">04</span><div><b class="neon">Sí = se guarda ese mismo dato</b> <span class="muted">· sin volver al modelo; queda en Historial con Deshacer</span></div></div>
       </div>
       <div class="glass p-4 mt-5 pop">
-        <div class="eyebrow mb-3" style="font-size:10.5px">De la parcela al tanque, en un chat (prueba en local, 25-nov)</div>
+        <div class="eyebrow mb-3" style="font-size:10.5px">De la parcela al tanque, en un chat </div>
         <div class="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
           <span class="tool-chip done">record_harvest · 1,800 kg</span><span class="muted">→</span>
           <span class="tool-chip done">manage_winery · Tanque 3,000 L</span><span class="muted">→</span>
@@ -748,11 +776,60 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
   </div>
 </section>
 
-<!-- 23 CAPTURAS -->
+<!-- 23 PRUEBA EN VIVO · GUION -->
+<section class="slide" data-name="Prueba en vivo · Guion" data-net="0.5" data-ai>
+  <div class="bg-aurora"></div>
+  <div class="content">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-5">
+      <div>
+        <div class="eyebrow mb-3 pop" style="color:#f5a8be">22 · Prueba en vivo</div>
+        <h2 class="h-display text-4xl md:text-5xl"><span data-type="Del viñedo a la botella, solo con el chat.">Del viñedo a la botella, solo con el chat.</span></h2>
+      </div>
+      <div class="flex flex-wrap gap-2 pop">
+        <span class="chip"><b class="text-white">18</b>&nbsp;mensajes</span><span class="chip"><b class="text-white">20</b>&nbsp;tarjetas Sí/No</span><span class="chip"><b class="text-white">10</b>&nbsp;herramientas</span><span class="chip">clic en una frase = copiarla</span>
+      </div>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-4" id="live-steps"></div>
+    <div class="flex flex-wrap gap-x-6 gap-y-2 mt-4 text-[12.5px] muted pop">
+      <span><span class="lk map">mapa</span> marca o dibuja en el mapa del chat y pulsa «Usar…»</span>
+      <span><span class="lk todas">sí a todas</span> escríbelo para confirmar varias tarjetas</span>
+      <span>Los códigos (LotUva-…, LotVin-…, FerAlc-T-…) los asigna el sistema: usa los que devuelva Vini.</span>
+      <span style="color:#f3d98c">Usa una cuenta con una sola bodega: con dos tanques FerAlc-T-01 en bodegas distintas, Vini no los distingue.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 24 PRUEBA EN VIVO · RESPALDO -->
+<section class="slide" data-name="Prueba en vivo · Respaldo" data-net="0.8" data-ai id="live2">
+  <div class="bg-aurora"></div>
+  <div class="content grid lg:grid-cols-[1.25fr_1fr] gap-8 items-center">
+    <div class="chat pop">
+      <div class="chat-head">
+        <div class="orb" id="head-orb2" style="--s:34px"><span class="pulse"><span class="sphere"><span class="colors"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span></span><span class="gl"></span></span></span><span class="orbit"><span class="sat"><span class="spark"></span></span><span class="sat" style="transform:rotate(120deg)"><span class="spark" style="animation-delay:-.25s"></span></span><span class="sat" style="transform:rotate(240deg)"><span class="spark" style="animation-delay:-.5s"></span></span></span></div>
+        <div><div class="font-display font-semibold">Vini</div><div class="text-[11px]" style="color:#80b148" id="head-status2">En línea</div></div>
+        <span class="ml-auto chip">corrida real · 25-nov · 11:16–11:27</span>
+      </div>
+      <div class="chat-body" id="chat-body2"></div>
+      <div class="flex items-center gap-2 px-3 pb-3">
+        <button class="tf on" id="btn-next2">▶ Siguiente paso <b>Enter</b></button>
+        <button class="tf" id="btn-reset2">Reiniciar</button>
+        <span class="ml-auto font-mono text-xs muted" id="step-count2">0 / 18</span>
+      </div>
+    </div>
+    <div>
+      <div class="eyebrow mb-3 pop" style="color:#f5a8be">23 · Respaldo de la prueba en vivo</div>
+      <h2 class="h-display text-4xl mb-5"><span data-type="La misma corrida, repetida.">La misma corrida, repetida.</span></h2>
+      <div class="space-y-3" id="phase-rail"></div>
+      <figure class="mt-5 pop" id="ficha-fig" style="opacity:.25;transition:opacity .6s var(--ease)"><img class="cap-hero zoomable" style="max-height:30vh;object-fit:cover;object-position:top" src="assets/cap/crop-ficha.png" data-full="assets/cap/ficha.png" alt="Ficha de trazabilidad"><figcaption class="fig-cap">Ficha de trazabilidad: 6,000 botellas de 100 % Nebbiolo 2026</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 25 CAPTURAS -->
 <section class="slide" data-name="El sistema" data-net="0.3">
   <div class="bg-deep"></div>
   <div class="content">
-    <div class="eyebrow mb-4 pop">22 · El sistema</div>
+    <div class="eyebrow mb-4 pop">24 · El sistema</div>
     <h2 class="h-display text-5xl md:text-6xl mb-6"><span data-type="Así se ve CosechIA.">Así se ve CosechIA.</span></h2>
     <div class="grid md:grid-cols-3 gap-4">
       <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-dashboard.png" data-full="assets/cap/dashboard.png" alt="Dashboard del viticultor"><figcaption>Dashboard · KPIs, etapa vitivinícola y clima por valle</figcaption></figure>
@@ -765,11 +842,11 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
   </div>
 </section>
 
-<!-- 24 ARQUITECTURA -->
+<!-- 26 ARQUITECTURA -->
 <section class="slide" data-name="Arquitectura" data-net="0.35">
   <div class="bg-deep"></div>
   <div class="content">
-    <div class="eyebrow mb-4 pop">23 · Arquitectura</div>
+    <div class="eyebrow mb-4 pop">25 · Arquitectura</div>
     <h2 class="h-display text-5xl md:text-6xl mb-6"><span data-type="Monolito moderno, IA como servicio.">Monolito moderno, IA como servicio.</span></h2>
     <div class="flex flex-wrap gap-2 mb-8 pop">
       <span class="chip">Laravel 13</span><span class="chip">Inertia 3</span><span class="chip">Vue 3.5</span><span class="chip">Tailwind 4</span><span class="chip">PostgreSQL</span><span class="chip">Leaflet</span><span class="chip">Chart.js</span><span class="chip">Open-Meteo</span><span class="chip" style="color:#edbf4d">LLM vía router</span><span class="chip" style="color:#edbf4d">mxbai-embed-large</span>
@@ -781,11 +858,11 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
   </div>
 </section>
 
-<!-- 25 MODELO DE DATOS -->
+<!-- 27 MODELO DE DATOS -->
 <section class="slide" data-name="Modelo de datos" data-net="0.35">
   <div class="bg-deep"></div>
   <div class="content">
-    <div class="eyebrow mb-4 pop">24 · Modelo de datos</div>
+    <div class="eyebrow mb-4 pop">26 · Modelo de datos</div>
     <h2 class="h-display text-5xl md:text-6xl mb-8"><span data-type="Del campo a la bodega, y la memoria de Vini.">Del campo a la bodega, y la memoria de Vini.</span></h2>
     <div class="grid md:grid-cols-2 gap-6">
       <figure class="pop"><img class="fig" style="max-height:56vh" src="assets/fig/fig21.png" alt=""><figcaption class="fig-cap">Fig. 21 · Campo, cosecha y bodega</figcaption></figure>
@@ -794,12 +871,12 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
   </div>
 </section>
 
-<!-- 26 CIERRE -->
+<!-- 28 CIERRE -->
 <section class="slide" data-name="Cierre" data-net="0.75">
   <div class="bg-photo" style="background-image:url(assets/img/valle-panoramica.jpg)"></div>
   <div class="content grid lg:grid-cols-[1.3fr_1fr] gap-12 items-center">
     <div>
-      <div class="eyebrow mb-6 pop">25 · Cierre</div>
+      <div class="eyebrow mb-6 pop">27 · Cierre</div>
       <h2 class="h-display text-6xl md:text-8xl mb-8"><span data-type="Gracias.">Gracias.</span></h2>
       <p class="text-xl text-vine-100/90 max-w-xl pop">CosechIA junta en un solo lugar el viñedo, la bodega y el conocimiento técnico, con un agente que responde con fuentes y registra por ti, siempre con tu Sí.</p>
     </div>
@@ -1018,6 +1095,7 @@ addEventListener('keydown', e => {
   if ($('#lightbox').classList.contains('open')){ if (e.key === 'Escape') $('#lightbox').classList.remove('open'); return; }
   const onLive = slides[current].id === 'live';
   if (onLive && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); playNext(); return; }
+  if (slides[current].id === 'live2' && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); flowNext(); return; }
   if (['ArrowDown','PageDown','ArrowRight',' '].includes(e.key)){ e.preventDefault(); step(1); }
   if (['ArrowUp','PageUp','ArrowLeft'].includes(e.key)){ e.preventDefault(); step(-1); }
   if (e.key === 'Home'){ e.preventDefault(); go(0); }
@@ -1147,6 +1225,122 @@ const TOOLSET = [
   }));
 })();
 
+/* ====================== PRUEBA EN VIVO: DEL VIÑEDO A LA BOTELLA (diapositivas 23 y 24) ====================== */
+/* Corrida real del 25-nov (11:16–11:27). Textos de las tarjetas y resúmenes tal como los devolvió Vini.
+   ui: map = mapa en el chat · si = una tarjeta · todas = «sí a todas» · read = solo lee · auto = escribe sin tarjeta */
+const PHASES = [['Viñedo y campo', 1, 6], ['Cosecha y bodega', 7, 12], ['Vino y cierre', 13, 18]];
+const FLOW = [
+  {n:1, u:'Crea un viñedo nuevo llamado Viña del Sol en el Valle de Guadalupe', tools:['manage_vineyard'], ui:'map',
+   map:{note:'Marca en el mapa la ubicación del viñedo Viña del Sol (está centrado en Valle de Guadalupe) y pulsa «Usar esta ubicación».', btn:'Usar esta ubicación'},
+   cards:[['¿Registro este viñedo?',['Ubicación: 32.088392, -116.594472','Nombre: Viña del Sol','Valle: Valle de Guadalupe']]], r:'Viñedo Viña del Sol registrado (ID 20).'},
+  {n:2, u:'Agrega una parcela de 2 hectáreas de Nebbiolo en Viña del Sol, plantada en 2018, productiva, en espaldera y con riego por goteo', tools:['manage_vineyard'], ui:'map',
+   map:{note:'Marca en el mapa el contorno de la parcela P1-ViSo y pulsa «Usar esta ubicación».', btn:'Usar este contorno', img:'assets/cap/crop-mapa-parcela.png'},
+   cards:[['¿Registro esta parcela?',['Viñedo: Viña del Sol · Código: P1-ViSo','Variedad: Nebbiolo · 2 ha · plantada en 2018 · productiva','Conducción: Espaldera · Riego: Goteo','Polígono: dibujado en el mapa']]], r:'Parcela P1-ViSo registrada (ID 97).'},
+  {n:3, u:'La P1-ViSo tuvo brotación el 10 de marzo, floración el 15 de mayo, cuajado el 5 de junio y envero el 25 de julio', tools:['manage_cycle','manage_cycle','manage_cycle','manage_cycle'], ui:'todas',
+   cards:[['¿Registro Brotación en P1-ViSo?',['Fecha: 2026-03-10']],['¿Registro Floración en P1-ViSo?',['Fecha: 2026-05-15']],['¿Registro Cuajado en P1-ViSo?',['Fecha: 2026-06-05 · estimada 2026-05-15']],['¿Registro Envero en P1-ViSo?',['Fecha: 2026-07-25 · estimada 2026-07-15']]],
+   r:'Brotación, Floración, Cuajado y Envero registrados en P1-ViSo (temporada 2026).'},
+  {n:4, u:'Lectura de madurez de la P1-ViSo de hoy: Brix 24.8, pH 3.35 y acidez 6.2', tools:['record_maturity_reading'], ui:'si',
+   cards:[['¿Registro esta lectura de madurez?',['Parcela: P1-ViSo · 2026-11-25','Brix 24.8 · pH 3.35 · AT 6.2 g/L']]], r:'Lectura registrada en P1-ViSo el 2026-11-25: Brix 24.8, pH 3.35, AT g/L 6.2 (ID 541).'},
+  {n:5, u:'¿Ya puedo cosechar la P1-ViSo?', tools:['check_harvest_readiness'], ui:'read',
+   r:'Sí, la P1-ViSo está en condiciones para la cosecha. El Brix (24.8) y el pH (3.35) están dentro del rango óptimo para Nebbiolo; la acidez (6.2 g/L) queda ligeramente por debajo. El pronóstico no indica lluvias y no hay plazos de seguridad vigentes. ¿Le gustaría registrar la cosecha ahora?'},
+  {n:6, u:'Sí, coseché hoy 6500 kg a mano, uva sana, para vino tinto', tools:['record_harvest'], ui:'si',
+   cards:[['¿Registro la cosecha de P1-ViSo (6,500 kg)?',['Parcela: P1-ViSo · temporada 2026 · 2026-11-25','Peso: 6,500 kg · Método: manual · Tipo de vino: tinto']]], r:'Cosecha registrada: lote LotUva-Neb-2026-001, 6,500 kg de P1-ViSo el 2026-11-25. ¿Es la única cosecha de esta parcela este año? Si es así, le propongo cerrar la temporada.'},
+  {n:7, u:'Agrega la bodega Vinos Dubacano a mis bodegas', tools:['manage_winery'], ui:'si',
+   cards:[['¿Agrego Vinos Dubacano a tus bodegas?',['Bodega del catálogo: Vinos Dubacano (Bo-SanVic-Du)']]], r:'Listo: Vinos Dubacano ya está en tus bodegas. ¿Registramos tus recipientes ahí?'},
+  {n:8, u:'En Vinos Dubacano registra un tanque de acero inoxidable de 6000 litros para fermentación y una barrica de roble de 225 litros para crianza', tools:['manage_winery','manage_winery'], ui:'todas',
+   cards:[['¿Registro este tanque de 6,000 L?',['Área: Fermentación alcohólica · acero inoxidable']],['¿Registro esta barrica de 225 L?',['Área: Crianza · roble']]], r:'Recipiente registrado: FerAlc-T-01 en Vinos Dubacano (6,000 L). Recipiente registrado: Crianz-B-01 (225 L).'},
+  {n:9, u:'La cosecha de la P1-ViSo llegó hoy a Vinos Dubacano, se recibieron 6450 kg', tools:['manage_wine_batch'], ui:'si',
+   cards:[['¿Registro la recepción de LotUva-Neb-2026-001 en Vinos Dubacano?',['Cosecha: 6,500 kg cosechados · Recibido: 6,450 kg','Merma: 50 kg']]], r:'Recepción registrada: LotUva-Neb-2026-001, 6,450 kg en bodega.'},
+  {n:10, u:'Registra hoy el despalillado y el estrujado de la LotUva-Neb-2026-001', tools:['record_winery_step','record_winery_step'], ui:'todas',
+   cards:[['¿Registro Despalillado de la cosecha LotUva-Neb-2026-001?',['2026-11-25']],['¿Registro Estrujado de la cosecha LotUva-Neb-2026-001?',['2026-11-25']]], r:'Registré Despalillado y Estrujado de la cosecha LotUva-Neb-2026-001 el 2026-11-25.'},
+  {n:11, u:'Pasa la LotUva-Neb-2026-001 al tanque con 4500 litros y crea el lote de vino', tools:['manage_wine_batch'], ui:'si',
+   cards:[['¿Paso LotUva-Neb-2026-001 al tanque?',['Cosechas: LotUva-Neb-2026-001 (6,450 kg recibidos) · Vino: tinto','Etapa: Fermentación alcohólica · Recipiente: 4,500 L']]], r:'Nació el lote de vino LotVin-T-2026-002 (tinto, 4,500 L).'},
+  {n:12, u:'Lectura de fermentación del lote de Nebbiolo hoy: densidad 1085 y 26 °C', tools:['record_winery_step'], ui:'si',
+   cards:[['¿Registro la lectura de fermentación de LotVin-T-2026-002?',['Densidad: 1,085 g/L · Temperatura: 26 °C']]], r:'Lectura registrada en LotVin-T-2026-002: 1,085 g/L a 26 °C.'},
+  {n:13, u:'El LotVin-T-2026-002 pasó hoy a fermentación maloláctica', tools:['record_winery_step'], ui:'si',
+   cards:[['¿Registro Fermentación maloláctica en LotVin-T-2026-002?',['Ahora en Fermentación alcohólica · el vino se queda en su recipiente']]], r:'Registré Fermentación maloláctica en LotVin-T-2026-002 el 2026-11-25.'},
+  {n:14, u:'Análisis del LotVin-T-2026-002 de hoy: pH 3.5, grado alcohólico 13.8, SO2 libre 28 y azúcar residual 2', tools:['record_winery_step'], ui:'si',
+   cards:[['¿Registro estos 4 análisis de LotVin-T-2026-002?',['pH 3.5 · Grado alcohólico 13.8 % vol','SO2 libre 28 mg/L · Azúcar residual 2 g/L']]], r:'4 análisis registrados en LotVin-T-2026-002.'},
+  {n:15, u:'Embotella todo el LotVin-T-2026-002 en botellas de 750 ml', tools:['record_winery_step'], ui:'si',
+   cards:[['¿Embotello 6000 botellas de 750 mL de LotVin-T-2026-002?',['Botellas: 6000 × 750 mL = 4,500 L','Se liberan sus recipientes y el lote queda cerrado.','Aviso: el embotellado no se deshace desde el chat.']]], r:'Embotellado registrado: lote de botellas LotVin-T-2026-002-E01, 6000 × 750 mL.'},
+  {n:16, u:'Muéstrame la trazabilidad del LotVin-T-2026-002', tools:['get_lots'], ui:'read',
+   r:'Este vino tinto proviene al 100 % de Nebbiolo de la añada 2026. **Origen:** cosecha LotUva-Neb-2026-001 de la P1-ViSo, viñedo Viña del Sol (Valle de Guadalupe). **Proceso:** fermentación alcohólica y maloláctica. **Resultado:** embotellado el 2026-11-25, 6,000 botellas de 750 mL (LotVin-T-2026-002-E01).'},
+  {n:17, u:'Ya no habrá más cosechas en la P1-ViSo este año, cierra la temporada', tools:['manage_cycle'], ui:'si',
+   cards:[['¿Cierro la temporada 2026 de P1-ViSo?',['Cosechas registradas: 1','Después ya no se registran etapas, cosechas ni registros de campo.']]], r:'Temporada 2026 de P1-ViSo cerrada. Ya no recibe etapas, cosechas ni registros de campo.'},
+  {n:18, u:'Hazme el reporte de la temporada 2026 de la P1-ViSo', tools:['create_field_report'], ui:'auto',
+   r:'He generado el reporte de la temporada 2026 de la P1-ViSo. Puedes consultarlo en Monitoreo › Reportes e imprimirlo o guardarlo como PDF. → Te llevo a reports'},
+];
+const UI_LABEL = {map:['map','mapa'], si:['si','Sí'], todas:['todas','sí a todas'], read:['read','solo lee'], auto:['read','sin tarjeta']};
+const uniq = a => [...new Set(a)].map(t => `${t}${a.filter(x => x === t).length > 1 ? ' ×' + a.filter(x => x === t).length : ''}`);
+
+(function liveGuide(){
+  const box = $('#live-steps'); if (!box) return;
+  box.innerHTML = PHASES.map(([name, a, b]) => `<div class="glass phase pop"><h3>${name}</h3>${FLOW.filter(s => s.n >= a && s.n <= b).map(s => {
+    const [cls, lab] = UI_LABEL[s.ui];
+    const extra = s.ui === 'map' ? '<span class="lk si">Sí</span>' : '';
+    return `<button class="lstep" data-copy="${esc(s.u)}"><span class="n">${s.n}</span><span><span class="q">«${esc(s.u)}»</span><span class="m">${uniq(s.tools).join(' · ')} <span class="lk ${cls}">${lab}</span>${extra}</span></span></button>`;
+  }).join('')}</div>`).join('');
+  $$('.lstep', box).forEach(b => b.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); } catch(e) {}
+    b.classList.add('copied'); setTimeout(() => b.classList.remove('copied'), 900);
+  }));
+})();
+
+let flowIndex = -1, flowBusy = false;
+const body2 = $('#chat-body2');
+function drawRail(){
+  const rail = $('#phase-rail'); if (!rail) return;
+  rail.innerHTML = PHASES.map(([name, a, b], i) => {
+    const cur = flowIndex >= 0 && FLOW[flowIndex].n >= a && FLOW[flowIndex].n <= b;
+    const dots = FLOW.filter(s => s.n >= a && s.n <= b).map(s => `<span class="dot ${flowIndex >= 0 && s.n <= FLOW[flowIndex].n ? 'on' : ''}" title="${s.n}"></span>`).join('');
+    return `<div class="prail ${cur ? 'cur' : ''}"><span class="num-chip">0${i+1}</span><div class="flex-1"><b>${name}</b> <span class="muted text-sm">· pasos ${a}–${b}</span><div class="dots">${dots}</div></div></div>`;
+  }).join('');
+  $('#step-count2').textContent = `${flowIndex + 1} / ${FLOW.length}`;
+  $('#ficha-fig').style.opacity = flowIndex >= 14 ? 1 : .25;
+}
+const scroll2 = () => gsap.to(body2, {scrollTop: body2.scrollHeight, duration:.5, ease:'power2.out'});
+const cardHTML = ([t, d]) => `<div class="vcard"><div class="t">${esc(t)}</div><div class="d">${d.map(esc).join('<br>')}</div><div class="btns"><span class="vbtn si">✓ Sí</span><span class="vbtn">✕ No</span></div></div>`;
+const inlineMd = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+async function flowNext(){
+  if (flowBusy || !body2 || flowIndex >= FLOW.length - 1) return;
+  flowBusy = true; flowIndex++; drawRail();
+  const s = FLOW[flowIndex], fast = reduced ? 0 : 1;
+  const add = (html, cls) => { const el = document.createElement('div'); el.className = cls; el.innerHTML = html; body2.appendChild(el); gsap.fromTo(el, {opacity:0, y:10}, {opacity:1, y:0, duration:.35}); scroll2(); return el; };
+  add(`<div><div class="bubble">${esc(s.u)}</div></div>`, 'msg user');
+  await sleep(350*fast);
+  $('#head-orb2').classList.add('thinking'); $('#head-status2').textContent = 'Pensando…';
+  const ag = add(`${orbHTML(30, true)}<div class="min-w-0 flex-1"><div class="tools flex flex-wrap gap-1.5"></div><div class="ans"></div></div>`, 'msg agent');
+  await sleep(500*fast);
+  uniq(s.tools).forEach(t => { const c = document.createElement('span'); c.className = 'tool-chip'; c.innerHTML = `<span class="spin"></span>${t}`; $('.tools', ag).appendChild(c); gsap.fromTo(c, {scale:0}, {scale:1, duration:.35, ease:'back.out(2.5)'}); });
+  await sleep(900*fast);
+  $$('.tool-chip', ag).forEach(c => c.classList.add('done'));
+  ag.querySelector('.orb').classList.remove('thinking'); $('#head-orb2').classList.remove('thinking'); $('#head-status2').textContent = 'En línea';
+  const ans = $('.ans', ag);
+  if (s.map){
+    ans.innerHTML = `<div class="bubble mt-1.5">${esc(s.map.note)}${s.map.img ? `<div class="mapbox"><img src="${s.map.img}" alt=""></div>` : '<div class="mapbox" style="height:90px;display:grid;place-items:center;background:rgba(86,160,220,.12);color:#a9d4f5;font-size:12px">📍 clic en el mapa del valle</div>'}<div class="btns mt-2"><span class="vbtn si">✓ ${esc(s.map.btn)}</span></div></div>`;
+    scroll2(); await sleep(1100*fast);
+  }
+  if (s.cards){
+    const wrap = document.createElement('div'); wrap.innerHTML = s.cards.map(cardHTML).join(''); ans.appendChild(wrap);
+    gsap.fromTo($$('.vcard', wrap), {opacity:0, scale:.9}, {opacity:1, scale:1, duration:.35, stagger:.12, ease:'back.out(2)'}); scroll2();
+    await sleep(1000*fast);
+    if (s.ui === 'todas'){ add(`<div><div class="bubble">sí a todas</div></div>`, 'msg user'); await sleep(350*fast); }
+    $$('.vcard .btns', wrap).forEach(b => { b.innerHTML = '<span class="vbtn ok">Guardado</span>'; gsap.fromTo(b, {scale:.8}, {scale:1, duration:.3, ease:'back.out(3)'}); });
+    await sleep(300*fast);
+    add(`${orbHTML(30, false)}<div class="min-w-0 flex-1"><div class="bubble">${inlineMd(s.r)}</div></div>`, 'msg agent');
+  } else {
+    ans.innerHTML = `<div class="bubble mt-1.5">${inlineMd(s.r)}</div>`;
+    gsap.fromTo($('.bubble', ans), {scale:0, opacity:0, transformOrigin:'0% 0%'}, {scale:1, opacity:1, duration:.35, ease:'back.out(2)'});
+  }
+  scroll2(); setTimeout(scroll2, 500);
+  flowBusy = false;
+}
+if (body2){
+  drawRail();
+  $('#btn-next2').onclick = flowNext;
+  $('#btn-reset2').onclick = () => { if (flowBusy) return; flowIndex = -1; body2.innerHTML = ''; drawRail(); flowNext(); };
+}
+
 /* #12 en la URL abre directamente esa diapositiva. */
 addEventListener('load', () => { const n = parseInt(location.hash.slice(1), 10); if (n) slides[Math.min(slides.length, n) - 1].scrollIntoView(); });
 
@@ -1189,6 +1383,7 @@ slides.forEach(slide => {
       if (slide.querySelector('#donut')) drawCharts();
       if (slide.querySelector('#bank')) drawBank();
       if (slide.id === 'live') setTimeout(() => { if (playIndex === -1) playNext(); }, 900);
+      if (slide.id === 'live2') setTimeout(() => { if (flowIndex === -1) flowNext(); }, 900);
     }
   });
 });
