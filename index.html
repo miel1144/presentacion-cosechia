@@ -57,7 +57,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
 .fig-cap{font-size:12px;color:var(--muted);margin-top:8px;font-family:var(--font-mono)}
 .type-caret::after{content:"";display:inline-block;width:.08em;height:.9em;margin-left:.05em;background:var(--primary);vertical-align:-.08em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-/* Las 20 tools flotan por la diapositiva como partículas. */
+/* Las 33 tools flotan por la diapositiva como partículas. */
 .tool-sky{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
 .tool-sky>span{position:absolute;left:0;top:0;will-change:transform}
 .tool-name{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-family:var(--font-mono);font-size:11px;padding:4px 10px;border-radius:999px;border:1px solid rgba(237,191,77,.32);background:rgba(30,18,14,.55);color:#f3d98c;opacity:.85}
@@ -153,8 +153,37 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
 .shot img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top left;cursor:zoom-in}
 .shot figcaption{padding:10px 12px;font-size:12.5px;color:var(--muted)}
 .cap-hero{display:block;width:100%;border-radius:14px;border:1px solid var(--glass-border);cursor:zoom-in;box-shadow:0 30px 80px -30px rgba(0,0,0,.8)}
+/* Después del feedback */
+.fb{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1.25fr);gap:14px;align-items:center}
+.fb-q{font-family:var(--font-display);font-style:italic;font-size:17px;line-height:1.35;color:#f5c3d2;padding:12px 16px;border-radius:14px;background:rgba(63,10,28,.45);border:1px solid rgba(214,64,114,.3)}
+.fb-arrow{color:var(--primary);font-size:22px;text-align:center;text-shadow:0 0 12px rgba(128,177,72,.7)}
+.fb-a{font-size:14.5px;line-height:1.45;padding:12px 16px;border-radius:14px;background:var(--glass);border:1px solid rgba(128,177,72,.3)}
+/* Tabla de herramientas */
+.tf{font-family:var(--font-mono);font-size:12px;padding:7px 12px;border-radius:10px;border:1px solid var(--glass-border);background:rgba(255,255,255,.03);color:var(--muted);cursor:pointer;transition:all .25s var(--ease)}
+.tf b{color:var(--text);font-weight:500;margin-left:4px}
+.tf.on{border-color:var(--primary);color:var(--text);box-shadow:0 0 0 3px rgba(128,177,72,.18);background:rgba(128,177,72,.12)}
+.tbl-scroll{scrollbar-width:thin;overscroll-behavior:contain}
+.ttable{width:100%;border-collapse:collapse;font-size:13px}
+.ttable th{position:sticky;top:0;z-index:1;text-align:left;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:12px 14px;background:rgba(14,22,12,.96);border-bottom:1px solid var(--glass-border)}
+.ttable td{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:top;line-height:1.4}
+.ttable tr.hide{display:none}
+.ttable td:first-child{font-family:var(--font-mono);font-size:12px;white-space:nowrap;color:#e6ece1}
+.ttable td:nth-child(3){color:#cfe8a6;font-style:italic}
+.ttable td:nth-child(4){color:var(--muted)}
+.rw{display:inline-block;font-family:var(--font-mono);font-size:10.5px;padding:2px 8px;border-radius:6px;white-space:nowrap}
+.rw.r{background:rgba(124,135,165,.16);color:#d3d8e3;border:1px solid rgba(124,135,165,.35)}
+.rw.w{background:rgba(233,167,36,.14);color:#f3d98c;border:1px solid rgba(233,167,36,.4)}
+.new-tag{display:inline-block;margin-left:6px;font-size:9.5px;padding:1px 6px;border-radius:5px;background:rgba(128,177,72,.2);color:#cfe8a6;border:1px solid rgba(128,177,72,.45);vertical-align:1px}
+/* Memoria */
+.mem-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:14.5px;line-height:1.45}
+.mem-list li{position:relative;padding-left:22px;color:#d9e2d2}
+.mem-list li::before{content:"✕";position:absolute;left:0;top:0;color:#e97098;font-size:12px}
+.mem-list.ok li::before{content:"✓";color:var(--primary)}
+.mem-list code{font-family:var(--font-mono);font-size:12px;color:#f5a8be}
 @media (max-width: 900px){
   html{scroll-snap-type:none}
+  .fb{grid-template-columns:1fr}.fb-arrow{display:none}
+  .ttable td:nth-child(4),.ttable th:nth-child(4){display:none}
   .slide{height:auto;min-height:100vh;padding:72px 16px 64px}
   .chat{height:60vh}
 }
@@ -165,7 +194,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
 <canvas id="net"></canvas>
 <svg id="cursor" viewBox="0 0 24 24"><path d="M4 2l15 10-6.5 1.5L16 21l-3 1.5-3.5-7.5L4 19z" fill="#fff" stroke="#0f1f0c" stroke-width="1.4" stroke-linejoin="round"/></svg>
 <div id="lightbox"><img alt=""></div>
-<div id="footer"><div class="brand"><img src="assets/img/cia-blanco.png" alt=""><span id="sec-name">Portada</span></div><div id="counter"><b>01</b> / 20</div></div>
+<div id="footer"><div class="brand"><img src="assets/img/cia-blanco.png" alt=""><span id="sec-name">Portada</span></div><div id="counter"><b>01</b> / 26</div></div>
 
 <!-- 01 PORTADA -->
 <section class="slide" data-name="Portada" data-net="0.75">
@@ -337,7 +366,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
     <div class="grid lg:grid-cols-[1.3fr_1fr] gap-8 items-start">
       <div class="space-y-3" id="rag">
         <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">01</span><div><b>DomainGuard</b> <span class="muted">· filtra lo que no es viticultura sin llamar al modelo</span></div></div>
-        <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">02</span><div><b>El modelo elige una herramienta</b> <span class="muted">· 20 tools, las que flotan alrededor: datos de la cuenta, clima, riesgo, conocimiento…</span></div></div>
+        <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">02</span><div><b>El modelo elige una herramienta</b> <span class="muted">· 33 tools, las que flotan alrededor: datos de la cuenta, clima, riesgo, conocimiento, registro…</span></div></div>
         <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">03</span><div><b>Búsqueda híbrida</b> <span class="muted">· vectores (mxbai-embed-large, 1024 dim.) + BM25, fusionados</span></div></div>
         <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">04</span><div><b>Fragmentos con la ruta de la sección</b> <span class="muted">· 246 de manuales + 208 de fichas</span></div></div>
         <div class="glass p-4 flex gap-4 items-center pop" style="border-color:rgba(128,177,72,.5)"><span class="num-chip">05</span><div><b class="neon">Respuesta con citas</b> <span class="muted">· «MANUALVID 2018, p. 30»; sin fuente, lo dice</span></div></div>
@@ -568,11 +597,162 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
   </div>
 </section>
 
-<!-- 16 CAPTURAS -->
+<!-- 17 DESPUÉS DEL FEEDBACK -->
+<section class="slide" data-name="Después del feedback" data-net="0.6" data-ai>
+  <div class="bg-aurora"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop" style="color:#f5a8be">16 · Después del feedback · 19 al 24 de noviembre</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-8"><span data-type="Lo que nos dijeron, y lo que hicimos.">Lo que nos dijeron, y lo que hicimos.</span></h2>
+    <div class="space-y-3">
+      <div class="fb pop"><div class="fb-q">«Vini no puede hacer nada, nomás es un asistente y me trae información.»</div><div class="fb-arrow">→</div><div class="fb-a"><b>14 herramientas nuevas: de 20 a 33.</b> <span class="muted">Desde el chat registra viñedos, cosechas, bodega, ciclos, recordatorios y reportes.</span></div></div>
+      <div class="fb pop"><div class="fb-q">«Vini no guarda bien las memorias.»</div><div class="fb-arrow">→</div><div class="fb-a"><b>Memoria rehecha.</b> <span class="muted">Pregunta antes de guardar, recibe las 15 más relevantes, cumple tus preferencias y se pueden corregir u olvidar.</span></div></div>
+      <div class="fb pop"><div class="fb-q">«Vini manda a llamar la tool muchas veces.»</div><div class="fb-arrow">→</div><div class="fb-a"><b>Una acción = una llamada = una tarjeta.</b> <span class="muted">Riego en 3 parcelas es una sola tarjeta; «sí a todas»; no repite reportes ni mapas; recargar ya no reenvía el historial viejo.</span></div></div>
+      <div class="fb pop"><div class="fb-q">«Vini me está vendiendo humo.»</div><div class="fb-arrow">→</div><div class="fb-a"><b>Nada se guarda sin tu Sí.</b> <span class="muted">La tarjeta muestra los datos exactos; el Sí ejecuta ese mismo dato sin volver al modelo, y la respuesta es lo que quedó en la base. Todo va al Historial con Deshacer.</span></div></div>
+      <div class="fb pop"><div class="fb-q">«La UI de bodega está muy mal hecha.»</div><div class="fb-arrow">→</div><div class="fb-a"><b>Bodega rehecha.</b> <span class="muted">Pestañas Bodegas · Cosechas · Lotes de vino · Botellas, proceso guiado por tipo de vino, línea del tiempo y seguimiento de fermentación.</span></div></div>
+    </div>
+    <div class="flex flex-wrap gap-2 mt-6 pop"><span class="chip" style="color:#edbf4d">+ BYOK: cada viticultor puede usar su propia IA</span><span class="chip">+ campana con pestañas</span><span class="chip">+ Monitoreo › Reportes</span><span class="chip">+ Operación › Ciclos</span></div>
+  </div>
+</section>
+
+<!-- 18 VINI ACTÚA -->
+<section class="slide" data-name="Vini actúa" data-net="0.7" data-ai>
+  <div class="bg-aurora"></div>
+  <div class="content grid lg:grid-cols-[1fr_1.25fr] gap-10 items-center">
+    <div>
+      <div class="eyebrow mb-4 pop" style="color:#f5a8be">17 · Vini actúa</div>
+      <h2 class="h-display text-5xl mb-6"><span data-type="Vini ya hace. Tú confirmas.">Vini ya hace. Tú confirmas.</span></h2>
+      <div class="space-y-3" id="act-steps">
+        <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">01</span><div><b>Lo pides como lo dirías</b> <span class="muted">· «Registra la cosecha de la P1: 1800 kg, hoy»</span></div></div>
+        <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">02</span><div><b>La herramienta valida sin escribir</b> <span class="muted">· parcela propia, plazo de seguridad, datos obligatorios</span></div></div>
+        <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">03</span><div><b>Tarjeta Sí / No con los datos exactos</b> <span class="muted">· varias parcelas, una sola tarjeta</span></div></div>
+        <div class="glass p-4 flex gap-4 items-center pop" style="border-color:rgba(128,177,72,.5)"><span class="num-chip">04</span><div><b class="neon">Sí = se guarda ese mismo dato</b> <span class="muted">· sin volver al modelo; queda en Historial con Deshacer</span></div></div>
+      </div>
+      <div class="glass p-4 mt-5 pop">
+        <div class="eyebrow mb-3" style="font-size:10.5px">De la parcela al tanque, en un chat (prueba en local, 25-nov)</div>
+        <div class="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
+          <span class="tool-chip done">record_harvest · 1,800 kg</span><span class="muted">→</span>
+          <span class="tool-chip done">manage_winery · Tanque 3,000 L</span><span class="muted">→</span>
+          <span class="tool-chip done">manage_wine_batch · recepción 1,780 kg</span><span class="muted">→</span>
+          <span class="tool-chip done">record_winery_step · despalillado</span><span class="muted">→</span>
+          <span class="tool-chip done">manage_wine_batch · LotVin-T-2026-001</span><span class="muted">→</span>
+          <span class="tool-chip done">record_winery_step · densidad 1,060</span>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <figure class="col-span-2 pop"><img class="cap-hero zoomable" src="assets/cap/crop-tarjeta.png" data-full="assets/cap/tarjeta.png" alt="Tarjeta Sí/No de una cosecha"><figcaption class="fig-cap">La tarjeta aparece en el chat y en Pendientes</figcaption></figure>
+      <figure class="pop"><img class="cap-hero zoomable" src="assets/cap/crop-varias-parcelas.png" data-full="assets/cap/varias-parcelas.png" alt="Una tarjeta para tres parcelas"><figcaption class="fig-cap">Riego en 3 parcelas, una tarjeta</figcaption></figure>
+      <figure class="pop"><img class="cap-hero zoomable" src="assets/cap/crop-historial.png" data-full="assets/cap/historial.png" alt="Historial con Deshacer"><figcaption class="fig-cap">Historial: cada acción con Deshacer</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 19 TABLA DE HERRAMIENTAS -->
+<section class="slide" data-name="Las 33 herramientas" data-net="0.4" data-ai>
+  <div class="bg-deep"></div>
+  <div class="content">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-5">
+      <div>
+        <div class="eyebrow mb-3 pop" style="color:#f5a8be">18 · Herramientas de Vini</div>
+        <h2 class="h-display text-4xl md:text-5xl"><span data-type="33 herramientas: 13 leen, 20 escriben.">33 herramientas: 13 leen, 20 escriben.</span></h2>
+      </div>
+      <div class="flex gap-2 pop" id="tool-filter">
+        <button class="tf on" data-f="all">Todas <b>33</b></button>
+        <button class="tf" data-f="r">Lectura <b>13</b></button>
+        <button class="tf" data-f="w">Escritura <b>20</b></button>
+        <button class="tf" data-f="new">Nuevas <b>14</b></button>
+      </div>
+    </div>
+    <div class="glass pop tbl-scroll" style="max-height:58vh;overflow-y:auto">
+      <table class="ttable">
+        <thead><tr><th>Herramienta</th><th>Tipo</th><th>Cómo se activa: lo que dice el viticultor</th><th>Para qué sirve</th></tr></thead>
+        <tbody id="tool-rows"></tbody>
+      </table>
+    </div>
+    <p class="muted text-sm mt-4 pop">Se activan solas: el modelo elige la herramienta según lo que pides. Cada una está dada de alta en la tabla <code class="font-mono">tools</code> (<code class="font-mono">habilitada</code>). El admin elige en <b>Agente › Configuración</b> si escribir pide <b>siempre tarjeta</b> o es <b>directo si lo pidió</b>. <span style="color:#f3d98c">✱ create_field_report</span> no pide tarjeta: genera contenido, no cambia datos del campo.</p>
+  </div>
+</section>
+
+<!-- 20 BYOK -->
+<section class="slide" data-name="BYOK" data-net="0.6" data-ai>
+  <div class="bg-aurora"></div>
+  <div class="content grid lg:grid-cols-[1fr_1.2fr] gap-10 items-center">
+    <div>
+      <div class="eyebrow mb-4 pop" style="color:#f5a8be">19 · BYOK · Bring Your Own Key</div>
+      <h2 class="h-display text-5xl mb-6"><span data-type="Tu propia IA, con tu propia llave.">Tu propia IA, con tu propia llave.</span></h2>
+      <div class="space-y-3">
+        <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">01</span><div><b>El admin marca «IA propia»</b> <span class="muted">· por usuario; ve la tabla de proveedores sin la key y puede apagarlo</span></div></div>
+        <div class="glass p-4 flex gap-4 items-center pop"><span class="num-chip">02</span><div><b>El viticultor configura</b> <span class="muted">· Ajustes › Mi proveedor de IA: proveedor, modelo, key cifrada y aviso de privacidad</span></div></div>
+        <div class="glass p-4 flex gap-4 items-center pop" style="border-color:rgba(128,177,72,.5)"><span class="num-chip">03</span><div><b class="neon">Vini responde con su IA</b> <span class="muted">· él paga su consumo; CosechIA vende el producto, no la IA</span></div></div>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mt-5">
+        <div class="glass p-4 pop"><b>Sin respaldo</b><div class="muted text-sm">Con «IA propia» no cae a FreeRouter: si falta la key o falla, Vini avisa y pide configurarla.</div></div>
+        <div class="glass p-4 pop"><b>Solo lo probado</b><div class="muted text-sm">Anthropic (Haiku y Sonnet 5.5) validado con key real. OpenAI, Gemini y otros, en pausa hasta pasar <code class="font-mono text-xs">byok:probar-modelos</code>.</div></div>
+      </div>
+    </div>
+    <div class="space-y-4">
+      <figure class="pop"><img class="cap-hero zoomable" src="assets/cap/crop-byok.png" data-full="assets/cap/byok.png" alt="Ajustes, Mi proveedor de IA"><figcaption class="fig-cap">Ajustes › Mi proveedor de IA (viticultor)</figcaption></figure>
+      <figure class="pop"><img class="cap-hero zoomable" src="assets/cap/crop-byok-admin.png" data-full="assets/cap/byok-admin.png" alt="Casilla IA propia en Usuarios"><figcaption class="fig-cap">Admin › Usuarios: la casilla «IA propia» por viticultor</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 21 UI NUEVA -->
+<section class="slide" data-name="UI nueva" data-net="0.3">
+  <div class="bg-deep"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop">20 · Interfaz nueva</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-6"><span data-type="Bodega rehecha y pantallas nuevas.">Bodega rehecha y pantallas nuevas.</span></h2>
+    <div class="grid md:grid-cols-3 gap-4">
+      <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-bodega-lotes.png" data-full="assets/cap/bodega-lotes.png" alt="Bodega, lotes de vino"><figcaption>Bodega · del tanque a la botella, guiado por tipo de vino</figcaption></figure>
+      <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-bodega-lote.png" data-full="assets/cap/bodega-lote.png" alt="Lote de vino abierto"><figcaption>Lote de vino · se abre en su tarjeta con etapas y volumen</figcaption></figure>
+      <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-ciclos.png" data-full="assets/cap/ciclos.png" alt="Ciclos"><figcaption>Operación › Ciclos · etapa y cierre de cada temporada</figcaption></figure>
+      <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-reporte.png" data-full="assets/cap/reporte.png" alt="Reporte de temporada"><figcaption>Monitoreo › Reportes · Vini lo arma y se imprime en PDF</figcaption></figure>
+      <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-vini-navega.png" data-full="assets/cap/vini-navega.png" alt="Vini abre el reporte"><figcaption>Vini flotante · crea el reporte y te lleva a él</figcaption></figure>
+      <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-dashboard-nuevo.png" data-full="assets/cap/dashboard-nuevo.png" alt="Dashboard y campana"><figcaption>Campana con pestañas Avisos / Por responder</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 22 MEMORIA -->
+<section class="slide" data-name="Memoria de Vini" data-net="0.6" data-ai>
+  <div class="bg-aurora"></div>
+  <div class="content">
+    <div class="eyebrow mb-4 pop" style="color:#f5a8be">21 · Memoria</div>
+    <h2 class="h-display text-5xl md:text-6xl mb-8"><span data-type="Ahora Vini sí recuerda, y te pregunta.">Ahora Vini sí recuerda, y te pregunta.</span></h2>
+    <div class="grid lg:grid-cols-[1fr_1fr_1.1fr] gap-6 items-start">
+      <div class="glass p-6 pop" style="border-color:rgba(214,64,114,.35)">
+        <div class="eyebrow mb-4" style="color:#f5a8be">Antes</div>
+        <ul class="mem-list">
+          <li>Las memorias llegaban al modelo con <code>id = 0</code>: no se podían olvidar.</li>
+          <li>Guardar una memoria mostraba «No se confirmó ningún registro» aunque sí se guardaba.</li>
+          <li>«Cítame una fuente» se trataba como dato y no se cumplía.</li>
+          <li>El historial vivía en el navegador y se reenviaba en cada turno: más tokens.</li>
+        </ul>
+      </div>
+      <div class="glass p-6 pop" style="border-color:rgba(128,177,72,.5)">
+        <div class="eyebrow mb-4">Ahora</div>
+        <ul class="mem-list ok">
+          <li>Cada memoria con su id: las <b>15 más relevantes y recientes</b>, sin las vencidas.</li>
+          <li><b>Propone guardar y espera tu Sí</b>; si lo pides explícito, ese es el permiso.</li>
+          <li>No guarda lo que ya vive en el sistema (clima, lecturas, registros).</li>
+          <li><b>Cumple tus preferencias</b> de cómo responder.</li>
+          <li>Recargar empieza una conversación nueva; al 3.er fallo seguido avisa al admin.</li>
+        </ul>
+      </div>
+      <div class="space-y-4">
+        <figure class="pop"><img class="cap-hero zoomable" src="assets/cap/crop-memoria-tarjeta.png" data-full="assets/cap/memoria-tarjeta.png" alt="Tarjeta para guardar una memoria"><figcaption class="fig-cap">«Recuerda que prefiero que me cites una fuente» → tarjeta</figcaption></figure>
+        <figure class="pop"><img class="cap-hero zoomable" src="assets/cap/crop-memorias.png" data-full="assets/cap/memorias.png" alt="Panel de memorias"><figcaption class="fig-cap">Panel Memorias: corregir, historial y olvidar</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 23 CAPTURAS -->
 <section class="slide" data-name="El sistema" data-net="0.3">
   <div class="bg-deep"></div>
   <div class="content">
-    <div class="eyebrow mb-4 pop">16 · El sistema</div>
+    <div class="eyebrow mb-4 pop">22 · El sistema</div>
     <h2 class="h-display text-5xl md:text-6xl mb-6"><span data-type="Así se ve CosechIA.">Así se ve CosechIA.</span></h2>
     <div class="grid md:grid-cols-3 gap-4">
       <figure class="shot pop"><div class="bar"><i></i><i></i><i></i></div><img class="zoomable" src="assets/cap/thumb-dashboard.png" data-full="assets/cap/dashboard.png" alt="Dashboard del viticultor"><figcaption>Dashboard · KPIs, etapa vitivinícola y clima por valle</figcaption></figure>
@@ -585,11 +765,11 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
   </div>
 </section>
 
-<!-- 17 ARQUITECTURA -->
+<!-- 24 ARQUITECTURA -->
 <section class="slide" data-name="Arquitectura" data-net="0.35">
   <div class="bg-deep"></div>
   <div class="content">
-    <div class="eyebrow mb-4 pop">17 · Arquitectura</div>
+    <div class="eyebrow mb-4 pop">23 · Arquitectura</div>
     <h2 class="h-display text-5xl md:text-6xl mb-6"><span data-type="Monolito moderno, IA como servicio.">Monolito moderno, IA como servicio.</span></h2>
     <div class="flex flex-wrap gap-2 mb-8 pop">
       <span class="chip">Laravel 13</span><span class="chip">Inertia 3</span><span class="chip">Vue 3.5</span><span class="chip">Tailwind 4</span><span class="chip">PostgreSQL</span><span class="chip">Leaflet</span><span class="chip">Chart.js</span><span class="chip">Open-Meteo</span><span class="chip" style="color:#edbf4d">LLM vía router</span><span class="chip" style="color:#edbf4d">mxbai-embed-large</span>
@@ -601,11 +781,11 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
   </div>
 </section>
 
-<!-- 18 MODELO DE DATOS -->
+<!-- 25 MODELO DE DATOS -->
 <section class="slide" data-name="Modelo de datos" data-net="0.35">
   <div class="bg-deep"></div>
   <div class="content">
-    <div class="eyebrow mb-4 pop">18 · Modelo de datos</div>
+    <div class="eyebrow mb-4 pop">24 · Modelo de datos</div>
     <h2 class="h-display text-5xl md:text-6xl mb-8"><span data-type="Del campo a la bodega, y la memoria de Vini.">Del campo a la bodega, y la memoria de Vini.</span></h2>
     <div class="grid md:grid-cols-2 gap-6">
       <figure class="pop"><img class="fig" style="max-height:56vh" src="assets/fig/fig21.png" alt=""><figcaption class="fig-cap">Fig. 21 · Campo, cosecha y bodega</figcaption></figure>
@@ -614,14 +794,14 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
   </div>
 </section>
 
-<!-- 19 CIERRE -->
+<!-- 26 CIERRE -->
 <section class="slide" data-name="Cierre" data-net="0.75">
   <div class="bg-photo" style="background-image:url(assets/img/valle-panoramica.jpg)"></div>
   <div class="content grid lg:grid-cols-[1.3fr_1fr] gap-12 items-center">
     <div>
-      <div class="eyebrow mb-6 pop">19 · Cierre</div>
+      <div class="eyebrow mb-6 pop">25 · Cierre</div>
       <h2 class="h-display text-6xl md:text-8xl mb-8"><span data-type="Gracias.">Gracias.</span></h2>
-      <p class="text-xl text-vine-100/90 max-w-xl pop">CosechIA junta en un solo lugar el viñedo, la bodega y el conocimiento técnico, con un agente que responde con fuentes.</p>
+      <p class="text-xl text-vine-100/90 max-w-xl pop">CosechIA junta en un solo lugar el viñedo, la bodega y el conocimiento técnico, con un agente que responde con fuentes y registra por ti, siempre con tu Sí.</p>
     </div>
     <div class="glass p-7 pop">
       <div class="eyebrow mb-4">Siguientes pasos</div>
@@ -629,7 +809,8 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans
         <li class="flex gap-3"><span class="num-chip">01</span><span>Repetir las parciales del banco (8, 10, 21, 27).</span></li>
         <li class="flex gap-3"><span class="num-chip">02</span><span>Riesgo por enfermedad y etapa fenológica, no un índice climático único.</span></li>
         <li class="flex gap-3"><span class="num-chip">03</span><span>Umbrales de incidencia en campo con fuente (chanchito blanco, SENASICA).</span></li>
-        <li class="flex gap-3"><span class="num-chip">04</span><span>Agregar la función BYOK (Bring Your Own Key).</span></li>
+        <li class="flex gap-3"><span class="num-chip">04</span><span>Que Vini hable: respuestas por voz.</span></li>
+        <li class="flex gap-3"><span class="num-chip">05</span><span>Habilitar más proveedores BYOK (OpenAI, Gemini) cuando pasen su prueba con key real.</span></li>
       </ul>
     </div>
   </div>
@@ -805,7 +986,7 @@ const step = dir => go((animating ? target : current) + dir);
 let wheelAcc = 0, wheelLocked = false, wheelQuiet = null;
 addEventListener('wheel', e => {
   if (!paged() || e.ctrlKey || $('#lightbox').classList.contains('open')) return;
-  if (e.target.closest('.chat-body')) return;
+  if (e.target.closest('.chat-body, .tbl-scroll')) return;
   e.preventDefault();
   // Un gesto = una diapositiva: se libera tras 180 ms sin eventos (inercia del touchpad incluida).
   clearTimeout(wheelQuiet);
@@ -817,7 +998,7 @@ addEventListener('wheel', e => {
 
 let touchY = null;
 addEventListener('touchstart', e => { touchY = e.touches[0].clientY; }, {passive:true});
-addEventListener('touchmove', e => { if (paged() && !e.target.closest('.chat-body')) e.preventDefault(); }, {passive:false});
+addEventListener('touchmove', e => { if (paged() && !e.target.closest('.chat-body, .tbl-scroll')) e.preventDefault(); }, {passive:false});
 addEventListener('touchend', e => {
   if (!paged() || touchY === null) return;
   const dy = touchY - e.changedTouches[0].clientY; touchY = null;
@@ -871,7 +1052,10 @@ const TOOLS = [
   ['detect_disease_risk','alert'], ['recommend_action','bulb'], ['list_recent_alerts','bell'], ['respond_decision','check'],
   ['record_maturity_reading','flask'], ['annotate_maturity_reading','pencil'], ['record_field_monitoring','eye'], ['record_irrigation','drop'],
   ['record_adverse_event','bolt'], ['record_yield_estimate','bars'], ['update_vineyard_log','book'], ['get_registration_catalog','list'],
-  ['get_wine_batch_status','wine'], ['navigate_screen','compass'], ['record_memory','bookmark'], ['forget_memory','trash'],
+  ['get_lots','wine'], ['navigate_screen','compass'], ['record_memory','bookmark'], ['forget_memory','trash'],
+  ['manage_vineyard','grid'], ['correct_record','pencil'], ['get_cycle_status','eye'], ['manage_cycle','check'],
+  ['check_harvest_readiness','grape'], ['record_harvest','grape'], ['manage_winery','wine'], ['manage_wine_batch','wine'],
+  ['record_winery_step','flask'], ['get_next_steps','list'], ['set_reminder','bell'], ['create_field_report','book'], ['create_report','alert'],
 ];
 (function toolSky(){
   const sky = $('#tool-sky'); if (!sky) return;
@@ -911,6 +1095,56 @@ const TOOLS = [
     }
     requestAnimationFrame(frame);
   })();
+})();
+
+/* ====================== TABLA DE HERRAMIENTAS (diapositiva 19) ====================== */
+/* [nombre, r = solo lee | w = escribe, nueva tras el feedback, frase que la activa, para qué sirve] */
+const TOOLSET = [
+  ['search_knowledge','r',0,'«¿Cómo prevengo la Botrytis?»','Busca en manuales y fichas y responde con cita.'],
+  ['list_my_parcelas','r',0,'«¿Cómo van mis parcelas?»','Resumen de cada parcela: variedad, último Brix, alertas, plazo de seguridad.'],
+  ['get_maturity_indicators','r',0,'«¿Cómo está la madurez de la P1?»','Brix, pH y AT contra el óptimo de su variedad.'],
+  ['get_weather','r',0,'«¿Qué clima hay esta semana en Guadalupe?»','Clima actual y pronóstico del valle (Open-Meteo).'],
+  ['detect_disease_risk','r',0,'«¿Hay riesgo de mildiu en la P2?»','Riesgo por enfermedad con el clima de 7 días contra su umbral.'],
+  ['recommend_action','r',0,'«¿Qué me recomiendas hacer en la P3?»','Evalúa madurez y pronóstico; recomienda cosechar antes de lluvia.'],
+  ['list_recent_alerts','r',0,'«¿Qué alertas tengo?»','Últimas alertas y avisos que generó el sistema.'],
+  ['get_registration_catalog','r',0,'(la usa Vini antes de registrar)','Resuelve nombres: parcelas, valles, labores y productos existentes.'],
+  ['navigate_screen','r',0,'«Llévame a la bodega»','Abre la pantalla pedida: dashboard, madurez, bodega, reportes…'],
+  ['get_cycle_status','r',1,'«¿En qué etapa va la P1?»','Etapa fenológica actual, fechas estimadas y reales, la siguiente.'],
+  ['check_harvest_readiness','r',1,'«¿Ya puedo cosechar la P2?»','Madurez + pronóstico + plazo de seguridad: si está lista.'],
+  ['get_lots','r',1,'«¿Cómo va el LotVin-T-2026-001?»','Consulta y trazabilidad de cosechas, lotes de vino y botellas.'],
+  ['get_next_steps','r',1,'«¿Qué me falta por hacer?»','Pendientes por prioridad: lecturas, etapas, ciclos, lotes sin análisis.'],
+  ['record_maturity_reading','w',0,'«Brix 23.5 y pH 3.4 en la P1»','Guarda una lectura de madurez.'],
+  ['annotate_maturity_reading','w',0,'«Anota que el pH de ayer salió raro»','Observación sobre un valor de una lectura ya guardada.'],
+  ['record_field_monitoring','w',0,'«Vi 10 % de oídio en hojas de la P2»','Monitoreo de plaga o enfermedad con incidencia y severidad.'],
+  ['record_irrigation','w',0,'«Regué la P2, P3 y P4, 3 horas»','Riego por parcela (horas o m³) y fuente; varias, una tarjeta.'],
+  ['record_adverse_event','w',0,'«Cayó granizo en la P5, 20 %»','Evento adverso: helada, granizo, calor, fauna…'],
+  ['record_yield_estimate','w',0,'«Conté 18 racimos de 150 g en 20 plantas»','Estimación de cosecha en kg a partir del conteo.'],
+  ['update_vineyard_log','w',0,'«Registra la poda de hoy en la P1»','Entrada en la bitácora de labores; avisa plazo de seguridad.'],
+  ['respond_decision','w',0,'«Apruebo la decisión de cosecha»','Aprueba o rechaza una decisión pendiente del agente.'],
+  ['record_memory','w',0,'«Recuerda que prefiero que me cites una fuente»','Guarda una memoria de largo plazo (pregunta primero).'],
+  ['forget_memory','w',0,'«Olvida lo de la fuente»','Olvida una memoria guardada.'],
+  ['create_report','w',1,'«Repórtalo al administrador»','Envía un reporte al buzón «Reportes de Vini» del admin.'],
+  ['manage_vineyard','w',1,'«Crea el viñedo Enteranube en Guadalupe»','Crea o edita viñedos y parcelas; dibuja el contorno en un mapa.'],
+  ['correct_record','w',1,'«Me equivoqué, eran 22.5 Brix»','Corrige o borra un registro de campo hecho hoy.'],
+  ['manage_cycle','w',1,'«La P1 entró en envero hoy»','Registra la fecha real de una etapa o cierra la temporada.'],
+  ['record_harvest','w',1,'«Cosecha de la P1: 1800 kg, hoy»','Registra la cosecha y crea su lote de uva.'],
+  ['manage_winery','w',1,'«Registra un tanque de 3000 L»','Bodegas y recipientes: elegir, registrar, editar.'],
+  ['manage_wine_batch','w',1,'«Llegó la cosecha a la bodega, 1780 kg»','Recepción de uva, crear el lote de vino, embotellar.'],
+  ['record_winery_step','w',1,'«Densidad 1060 a 24 °C»','Etapas de vinificación, análisis y fermentación del lote.'],
+  ['set_reminder','w',1,'«Avísame en 3 días para medir Brix»','Recordatorio a la hora exacta en la campana.'],
+  ['create_field_report','w',1,'«Hazme un reporte de la P1 de 2026»','Reporte de campo, cosecha y bodega en Monitoreo › Reportes. ✱'],
+];
+(function toolTable(){
+  const tb = $('#tool-rows'); if (!tb) return;
+  tb.innerHTML = TOOLSET.map(([n, rw, nu, frase, para]) =>
+    `<tr data-rw="${rw}" data-new="${nu}"><td>${n}${nu ? '<span class="new-tag">nueva</span>' : ''}</td><td><span class="rw ${rw}">${rw === 'r' ? 'lectura' : 'escritura'}</span></td><td>${esc(frase)}</td><td>${esc(para)}</td></tr>`).join('');
+  $$('#tool-filter .tf').forEach(b => b.addEventListener('click', () => {
+    $$('#tool-filter .tf').forEach(x => x.classList.toggle('on', x === b));
+    const f = b.dataset.f;
+    $$('tr', tb).forEach(tr => tr.classList.toggle('hide', !(f === 'all' || (f === 'new' ? tr.dataset.new === '1' : tr.dataset.rw === f))));
+    const visible = $$('tr:not(.hide)', tb);
+    if (!reduced) gsap.fromTo(visible, {opacity:0, x:-8}, {opacity:1, x:0, duration:.3, stagger:.015, ease:'power2.out'});
+  }));
 })();
 
 /* #12 en la URL abre directamente esa diapositiva. */
